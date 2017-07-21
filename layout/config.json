@@ -1,0 +1,87 @@
+{
+    "type": "array",
+    "properties": [{
+        "key": "cluster",
+        "description": "ElasticSearch cluster properties",
+        "type": "array",
+        "properties": [{
+            "key": "name",
+            "label": "Name",
+            "description": "The name of the ElasticSearch service",
+            "type": "string",
+            "default": "ElasticSearch",
+            "required": "no"
+        }, {
+            "key": "description",
+            "label": "Description",
+            "description": "The description of the ElasticSearch service",
+            "type": "string",
+            "default": "",
+            "required": "no"
+        }, {
+            "key": "vxnet",
+            "label": "VxNet",
+            "description": "Choose a vxnet to join",
+            "type": "string",
+            "default": "",
+            "required": "yes"
+        }, {
+            "key": "es_node",
+            "label": "ElasticSearch Node",
+            "description": "role-based node properties",
+            "type": "array",
+            "properties": [{
+                "key": "cpu",
+                "label": "CPU",
+                "description": "CPUs of each node",
+                "type": "integer",
+                "default": 1,
+                "range": [
+                    1,
+                    2,
+                    4,
+                    8
+                ],
+                "required": "yes"
+            }, {
+                "key": "memory",
+                "label": "Memory",
+                "description": "memory of each node (in MiB)",
+                "type": "integer",
+                "default": 2048,
+                "range": [
+                    1024,
+                    2048,
+                    4096,
+                    8192,
+                    16384,
+                    32768
+                ],
+                "required": "yes"
+            }, {
+                "key": "instance_class",
+                "label": "Instance Class",
+                "description": "The instance type for the cluster to run，such as high performance，high performance plus",
+                "type": "integer",
+                "default": 0,
+                "range": [0, 1],
+                "required": "yes"
+            }, {
+                "key": "count",
+                "label": "Node Count",
+                "description": "Number of nodes for the cluster to create",
+                "type": "integer",
+                "default": 3,
+                "min": 1,
+                "required": "yes"
+            }, {
+                "key": "volume_size",
+                "label": "Volume Size",
+                "description": "The volume size for each node",
+                "type": "integer",
+                "default": 10,
+                "required": "yes"
+            }]
+        }]
+    }]
+}
