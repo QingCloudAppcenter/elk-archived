@@ -1,0 +1,7 @@
+[template]
+src = "elasticsearch.tmpl"
+dest = "/usr/share/elasticsearch/config/elasticsearch.yml"
+keys = [
+    "/",
+]
+reload_cmd = "/usr/share/elasticsearch/bin/elasticsearch-restart.sh"

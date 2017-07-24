@@ -1,9 +1,0 @@
-confdir = "/etc/confd"
-#interval = 4
-backend = "metad"
-nodes = ['metadata:80']
-prefix = "/self"
-scheme = "http"
-verbose = true
-watch = true
-log-level = "debug"
