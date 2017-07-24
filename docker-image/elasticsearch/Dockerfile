@@ -6,7 +6,7 @@ RUN addgroup -S elasticsearch && adduser -S -G elasticsearch elasticsearch
 ENV ES_VERSION="elasticsearch-5.5.0" \
     PATH="/opt/elasticsearch/bin:$PATH"
 
-RUN apk add --no-cache bash 'su-exec>=0.2'
+RUN apk add --no-cache bash 'su-exec>=0.2' curl
 
 ADD $ES_VERSION.tar.gz /opt
 RUN rm -rf /opt/elasticsearch && mv /opt/$ES_VERSION /opt/elasticsearch
@@ -23,8 +23,6 @@ RUN set -ex; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done;
 
-COPY config/* ./config/ 
-
 COPY docker-entrypoint.sh /
 
 COPY bin/* /opt/elasticsearch/bin/
@@ -34,4 +32,4 @@ COPY templates/*  /etc/confd/templates/
 VOLUME /opt/elasticsearch/data
 EXPOSE 9200 9300
 
-
+ENTRYPOINT ["/opt/qingcloud/app-agent/bin/confd"]

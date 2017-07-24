@@ -5,7 +5,7 @@
     "nodes": [{
         "container": {
             "type": "docker",
-            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch:5.5.0-dev14"
+            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch:5.5.0"
         },
         "count": {{cluster.es_node.count}},
         "cpu": {{cluster.es_node.cpu}},
@@ -14,7 +14,6 @@
         "volume": {
             "size": {{cluster.es_node.volume_size}}
         },
-        "server_id_upper_bound": 255,
         "services": {
             "start": {
                 "cmd": "elasticsearch-start.sh"
@@ -27,7 +26,11 @@
         "vertical_scaling_policy": "sequential"
     }],
     "endpoints": {
-        "rest": {
+        "rpc_port": {
+            "port": 9300,
+            "protocol": "tcp"
+        },
+        "http_port": {
             "port": 9200,
             "protocol": "http"
         }
@@ -44,7 +47,7 @@
     },
     "monitor": {
         "enable": true,
-        "cmd": "/opt/zookeeper/bin/get-monitor.sh",
+        "cmd": "elasticsearch-monitor.sh",
         "items": {
             "mode": {
                 "unit": "",
