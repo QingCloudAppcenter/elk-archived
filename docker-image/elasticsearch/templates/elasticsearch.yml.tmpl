@@ -67,8 +67,8 @@ http.port: 9200
 #
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 #
-{{$hosts := lsdir "/hosts/"}}{{$cluster_size := len $hosts}}
-discovery.zen.ping.unicast.hosts: [{{ range $host := $hosts }}{{ $hostip := printf "/hosts/%s/ip" $host }}{{getv $hostip}}, {{end}}]
+{{$hosts := lsdir "/hosts/es_node/"}}{{$cluster_size := len $hosts}}
+discovery.zen.ping.unicast.hosts: [{{ range $host := $hosts }}{{ $hostip := printf "/hosts/es_node/%s/ip" $host }}{{getv $hostip}}, {{end}}]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
@@ -90,3 +90,8 @@ gateway.recover_after_nodes: {{max (sub $cluster_size 2) $minimum_master_nodes}}
 # Require explicit names when deleting indices:
 #
 action.destructive_requires_name: true
+
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+

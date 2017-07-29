@@ -3,113 +3,144 @@
     "description": {{cluster.description}},
     "vxnet": {{cluster.vxnet}},
     "nodes": [{
+        "role": "es_node",
         "container": {
             "type": "docker",
-            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch:5.5.0"
+            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch:5.5.1"
         },
+        "instance_class": {{cluster.es_node.instance_class}},
         "count": {{cluster.es_node.count}},
         "cpu": {{cluster.es_node.cpu}},
         "memory": {{cluster.es_node.memory}},
-        "instance_class": {{cluster.es_node.instance_class}},
         "volume": {
             "size": {{cluster.es_node.volume_size}}
         },
+        "vertical_scaling_policy": "sequential",
         "services": {
             "start": {
-                "cmd": "elasticsearch-start.sh"
+                "cmd": "/opt/elasticsearch/bin/start.sh"
             },
             "stop": {
-                "cmd": "elasticsearch-stop.sh"
+                "cmd": "/opt/elasticsearch/bin/stop.sh"
             }
         },
-        "advanced_actions": ["change_vxnet", "scale_horizontal"],
-        "vertical_scaling_policy": "sequential"
+        "health_check": {
+            "enable": true,
+            "interval_sec": 60,
+            "timeout_sec": 10,
+            "action_timeout_sec": 30,
+            "healthy_threshold": 2,
+            "unhealthy_threshold": 2,
+            "check_cmd": "curl http://localhost:9200/",
+            "action_cmd": "/opt/elasticsearch/bin/restart.sh"
+        },
+        "monitor": {
+            "enable": true,
+            "cmd": "/opt/elasticsearch/bin/monitor.py",
+            "items": {
+                "cluster_status": {
+                    "unit": "",
+                    "value_type": "str",
+                    "statistics_type": "latest",
+                    "enums": ["green", "yellow", "red"]
+                },
+                "cluster_jvm_heap_used_in_percent": {
+                    "unit": "%",
+                    "value_type": "int",
+                    "statistics_type": "avg",
+                    "scale_factor_when_display": 0.1
+                },
+                "cluster_jvm_threads_count": {
+                    "unit": "",
+                    "value_type": "int",
+                    "statistics_type": "latest"
+                },
+                "cluster_indices_count": {
+                    "unit": "",
+                    "value_type": "int",
+                    "statistics_type": "latest"
+                },
+                "cluster_shards_primaries_count": {
+                    "unit": "",
+                    "value_type": "int",
+                    "statistics_type": "latest"
+                },
+                "cluster_shards_replication_count": {
+                    "unit": "",
+                    "value_type": "int",
+                    "statistics_type": "latest"
+                },
+                "cluster_docs_count": {
+                    "unit": "",
+                    "value_type": "int",
+                    "statistics_type": "latest"
+                },
+                "cluster_docs_deleted_count": {
+                    "unit": "",
+                    "value_type": "int",
+                    "statistics_type": "latest"
+                }
+            },
+            "groups": {
+                "cluster_indices_group": ["cluster_indices_count", "cluster_docs_count", "cluster_docs_deleted_count"],
+                "cluster_shards_group": ["cluster_shards_primaries_count", "cluster_shards_replication_count"]
+            },
+            "display": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_indices_group", "cluster_shards_group"],
+            "alarm": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count"]
+        }
+    },
+    {
+        "role": "kbn_node",
+        "container": {
+            "type": "docker",
+            "image": "dockerhub.qingcloud.com/hevienzdong/kibana:5.5.1"
+        },
+        "instance_class": {{cluster.kbn_node.instance_class}},
+        "count": {{cluster.kbn_node.count}},
+        "cpu": {{cluster.kbn_node.cpu}},
+        "memory": {{cluster.kbn_node.memory}},
+        "volume": {
+            "size": {{cluster.kbn_node.volume_size}}
+        },
+        "vertical_scaling_policy": "sequential",
+        "services": {
+            "start": {
+                "cmd": "/opt/kibana/bin/start.sh"
+            },
+            "stop": {
+                "cmd": "/opt/kibana/bin/stop.sh"
+            },
+            "scale_out": {
+                "cmd": "/opt/kibana/bin/restart.sh"
+            },
+            "scale_in": {
+                "cmd": "/opt/kibana/bin/restart.sh"
+            }
+        },
+        "health_check": {
+            "enable": true,
+            "interval_sec": 60,
+            "timeout_sec": 10,
+            "action_timeout_sec": 30,
+            "healthy_threshold": 2,
+            "unhealthy_threshold": 2,
+            "check_cmd": "curl http://localhost:5601/",
+            "action_cmd": "/opt/kibana/bin/restart.sh"
+        }
     }],
+    "advanced_actions": ["change_vxnet", "scale_horizontal"],
     "endpoints": {
-        "rpc_port": {
+        "es_rpc_port": {
             "port": 9300,
             "protocol": "tcp"
         },
-        "http_port": {
+        "es_http_port": {
             "port": 9200,
             "protocol": "http"
+        },
+        "kibana_http_port": {
+            "port": 5601,
+            "protocol": "http"
         }
-    },
-    "health_check": {
-        "enable": true,
-        "interval_sec": 60,
-        "timeout_sec": 10,
-        "action_timeout_sec": 30,
-        "healthy_threshold": 2,
-        "unhealthy_threshold": 2,
-        "check_cmd": "curl http://localhost:9200/",
-        "action_cmd": "elasticsearch-restart.sh"
-    },
-    "monitor": {
-        "enable": true,
-        "cmd": "elasticsearch-monitor.sh",
-        "items": {
-            "mode": {
-                "unit": "",
-                "value_type": "str",
-                "statistics_type": "latest",
-                "enums": ["L", "F", "S"]
-            },
-            "min": {
-                "unit": "ms",
-                "value_type": "int",
-                "statistics_type": "min",
-                "scale_factor_when_display": 1
-            },
-            "avg": {
-                "unit": "ms",
-                "value_type": "int",
-                "statistics_type": "avg",
-                "scale_factor_when_display": 1
-            },
-            "max": {
-                "unit": "ms",
-                "value_type": "int",
-                "statistics_type": "max",
-                "scale_factor_when_display": 1
-            },
-            "received": {
-                "unit": "count",
-                "value_type": "int",
-                "statistics_type": "latest",
-                "scale_factor_when_display": 1
-            },
-            "sent": {
-                "unit": "count",
-                "value_type": "int",
-                "statistics_type": "latest",
-                "scale_factor_when_display": 1
-            },
-            "active": {
-                "unit": "count",
-                "value_type": "int",
-                "statistics_type": "latest",
-                "scale_factor_when_display": 1
-            },
-            "outstanding": {
-                "unit": "count",
-                "value_type": "int",
-                "statistics_type": "latest",
-                "scale_factor_when_display": 1
-            },
-            "znode": {
-                "unit": "znode_count",
-                "value_type": "int",
-                "statistics_type": "latest",
-                "scale_factor_when_display": 1
-            }
-        },
-        "groups": {
-            "latency":  ["min", "avg", "max"],
-            "throughput": ["received", "sent"],
-            "connections": ["active", "outstanding"]
-        },
-        "display": ["mode", "latency", "throughput", "connections", "znode"],
-        "alarm": ["avg"]
     }
 }

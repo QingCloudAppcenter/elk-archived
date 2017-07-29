@@ -4,4 +4,4 @@ dest = "/opt/elasticsearch/config/log4j2.properties"
 keys = [
     "/",
 ]
-reload_cmd = "elasticsearch-restart.sh"
+reload_cmd = "/opt/elasticsearch/bin/restart.sh"
