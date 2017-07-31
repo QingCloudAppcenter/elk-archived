@@ -108,14 +108,6 @@
                 "default": 0,
                 "range": [0, 1],
                 "required": "yes"
-            }, {
-                "key": "volume_size",
-                "label": "Volume Size",
-                "description": "The volume size for each node",
-                "type": "integer",
-                "default": 10,
-                "min": 10,
-                "required": "yes"
             }]
         }]
     }]
