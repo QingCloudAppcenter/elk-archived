@@ -1,11 +1,11 @@
-FROM dockerhub.qingcloud.com/qingcloud/confd:v0.13.7
+FROM dockerhub.qingcloud.com/hevienzdong/confd-jre8
 
 WORKDIR /opt/kibana
 
 ENV KBN_VERSION="kibana-5.5.1-linux-x86_64" \
     PATH="/opt/kibana/bin:$PATH"
 
-RUN apk add --no-cache bash nodejs curl 
+RUN apk add --no-cache bash nodejs curl
 
 ADD $KBN_VERSION.tar.gz /opt
 RUN rm -rf /opt/kibana && mv /opt/$KBN_VERSION /opt/kibana

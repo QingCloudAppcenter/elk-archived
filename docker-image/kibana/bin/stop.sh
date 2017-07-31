@@ -1,10 +1,6 @@
-echo "[Stop] Preparing for stoping kibana..."
-PID=`ps -ef|grep -w kibana | grep -v "grep -w kibana"|awk '{print $1}'`
-echo "[Stop] Kibana pid is ${PID}."
-
-if [ -n "$PID" ]; then
-    echo "[Stop] Kill kibana with pid ${PID}."
-    kill -SIGTERM $PID
+flock -n /tmp/kbn.lock -c "/opt/kibana/bin/dostop.sh >> /opt/qingcloud/app-agent/log/app.log"
+if [ $? -ne 0 ]; then
+    echo "[=[Stop]=] Can't lock the file."
 else
-    echo "[Stop] Kibana is not running."
+    echo "[=[Stop]=] Lock the file successfully."
 fi

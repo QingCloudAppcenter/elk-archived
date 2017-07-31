@@ -1,10 +1,6 @@
-echo "[Stop] Preparing for stoping elasticsearch..."
-PID=`ps -ef|grep -w Elasticsearch | grep -v "grep -w Elasticsearch"|awk '{print $1}'`
-echo "[Stop] Elasticsearch pid is ${PID}."
-
-if [ -n "$PID" ]; then
-    echo "[Stop] Kill elasticsearch with pid ${PID}."
-    kill -SIGTERM $PID
+flock -n /tmp/es.lock -c "/opt/elasticsearch/bin/dostop.sh >> /opt/qingcloud/app-agent/log/app.log"
+if [ $? -ne 0 ]; then
+    echo "[=[Stop]=] Can't lock the file."
 else
-    echo "[Stop] Elasticsearch is not running."
+    echo "[=[Stop]=] Lock the file successfully."
 fi

@@ -1,3 +1,5 @@
+set -e
+
 echo "[Start] Preparing for starting elasticsearch..."
 
 . /opt/elasticsearch/bin/func.sh

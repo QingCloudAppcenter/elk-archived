@@ -8,7 +8,7 @@
     "CPU": "CPU",
     "CPUs of each node": "CPUs of each node",
     "Memory": "Memory",
-    "Memory of each node (in MiB)": "Memory of each node (in MiB)",
+    "Memory of each node": "Memory of each node",
     "Volume Size": "Volume Size",
     "Instance Class": "Instance Class",
     "The volume size for each node": "The volume size for each node",
@@ -17,7 +17,7 @@
     "count": "count",
     "esnode_count": "esnode_count",
     "Number of nodes for the cluster to create": "Number of nodes for the cluster to create",
-    "instance class": "instance class",
+    "Instance class": "instance class",
     "The instance type for the cluster to run, such as high performance, high performance plus": "The instance type for the cluster to run, such as high performance, high performance plus",
     "es_node": "es_node"
 }
