@@ -1,1 +1,1 @@
-docker push dockerhub.qingcloud.com/hevienzdong/kibana:5.5.1
+docker push dockerhub.qingcloud.com/qingcloud/kibana:v1.0

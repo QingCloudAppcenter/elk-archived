@@ -11,6 +11,8 @@
     "Memory of each node": "每个节点的内存数量",
     "Instance Class": "主机类型",
     "ElasticSearch Node": "ElasticSearch 节点",
+    "Kibana Node": "Kibana 节点",
+    "Logstash Node": "Logstash 节点",
     "Node Count": "节点数量",
     "count": "次",
     "esnode_count": "个",

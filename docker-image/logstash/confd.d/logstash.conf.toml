@@ -1,0 +1,7 @@
+[template]
+src = "logstash.conf.tmpl"
+dest = "/opt/logstash/config/logstash.conf"
+keys = [
+    "/",
+]
+reload_cmd = "/opt/logstash/bin/restart.sh"

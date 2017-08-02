@@ -6,7 +6,7 @@
         "role": "es_node",
         "container": {
             "type": "docker",
-            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch:5.5.1"
+            "image": "dockerhub.qingcloud.com/qingcloud/elasticsearch:v1.0"
         },
         "instance_class": {{cluster.es_node.instance_class}},
         "count": {{cluster.es_node.count}},
@@ -88,12 +88,11 @@
             "display": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_indices_group", "cluster_shards_group"],
             "alarm": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count"]
         }
-    },
-    {
+    }, {
         "role": "kbn_node",
         "container": {
             "type": "docker",
-            "image": "dockerhub.qingcloud.com/hevienzdong/kibana:5.5.1"
+            "image": "dockerhub.qingcloud.com/qingcloud/kibana:v1.0"
         },
         "instance_class": {{cluster.kbn_node.instance_class}},
         "count": {{cluster.kbn_node.count}},
@@ -123,6 +122,44 @@
             "unhealthy_threshold": 2,
             "check_cmd": "curl http://localhost:5601/",
             "action_cmd": "/opt/kibana/bin/restart.sh"
+        }
+    }, {
+        "role": "lst_node",
+        "container": {
+            "type": "docker",
+            "image": "dockerhub.qingcloud.com/hevienzdong/logstash:v1.0"
+        },
+        "instance_class": {{cluster.lst_node.instance_class}},
+        "count": {{cluster.lst_node.count}},
+        "cpu": {{cluster.lst_node.cpu}},
+        "memory": {{cluster.lst_node.memory}},
+        "vertical_scaling_policy": "sequential",
+        "services": {
+            "start": {
+                "cmd": "/opt/logstash/bin/start.sh"
+            },
+            "stop": {
+                "cmd": "/opt/logstash/bin/stop.sh"
+            },
+            "scale_out": {
+                "cmd": "/opt/logstash/bin/restart.sh"
+            },
+            "scale_in": {
+                "cmd": "/opt/logstash/bin/restart.sh"
+            }
+        },
+        "env": {
+            "conf_content": {{env.lst_node.conf_content}}
+        },
+        "health_check": {
+            "enable": true,
+            "interval_sec": 60,
+            "timeout_sec": 10,
+            "action_timeout_sec": 30,
+            "healthy_threshold": 2,
+            "unhealthy_threshold": 2,
+            "check_cmd": "curl http://localhost:9600/",
+            "action_cmd": "/opt/logstash/bin/restart.sh"
         }
     }],
     "advanced_actions": ["change_vxnet", "scale_horizontal"],

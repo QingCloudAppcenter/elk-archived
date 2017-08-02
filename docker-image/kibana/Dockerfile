@@ -1,4 +1,4 @@
-FROM dockerhub.qingcloud.com/hevienzdong/confd-jre8
+FROM dockerhub.qingcloud.com/qingcloud/confd-jre8:v0.13.7
 
 WORKDIR /opt/kibana
 
