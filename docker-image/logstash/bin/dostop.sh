@@ -1,5 +1,7 @@
+set -e
+
 echo "[Stop] Preparing for stoping logstash..."
-PID=`pidof java`
+PID=`ps -ef|grep '/data/logstash/config/logstash.conf' | grep -v 'grep /data/logstash/config/logstash.conf' | awk '{print $1}'`
 echo "[Stop] Logstash pid is ${PID}."
 
 if [ -n "$PID" ]; then

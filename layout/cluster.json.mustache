@@ -133,7 +133,11 @@
         "count": {{cluster.lst_node.count}},
         "cpu": {{cluster.lst_node.cpu}},
         "memory": {{cluster.lst_node.memory}},
+        "volume": {
+            "size": {{cluster.lst_node.volume_size}}
+        },
         "vertical_scaling_policy": "sequential",
+        "user_access": true,
         "services": {
             "start": {
                 "cmd": "/opt/logstash/bin/start.sh"
@@ -149,7 +153,10 @@
             }
         },
         "env": {
-            "conf_content": {{env.lst_node.conf_content}}
+            "input_conf_content": {{env.lst_node.input_conf_content}},
+            "filter_conf_content": {{env.lst_node.filter_conf_content}},
+            "output_conf_content": {{env.lst_node.output_conf_content}},
+            "gemfile_append_content": {{env.lst_node.gemfile_append_content}}
         },
         "health_check": {
             "enable": true,

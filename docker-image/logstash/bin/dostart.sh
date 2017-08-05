@@ -1,13 +1,16 @@
+set -e
+
 echo "[Start] Preparing for starting logstash..."
 
 . /opt/logstash/bin/func.sh
 
-PID=`pidof java`
+PID=`ps -ef|grep '/data/logstash/config/logstash.conf' | grep -v 'grep /data/logstash/config/logstash.conf' | awk '{print $1}'`
 echo "[Start] Logstash pid is ${PID}."
 
 if [ -z "$PID" ]; then
     echo "[Start] Starting logstash..."
-    nohup /opt/logstash/bin/logstash -f /opt/logstash/config/logstash.conf >> /opt/qingcloud/app-agent/log/app.log &
+    mkdir -p /data/logstash/plugins/
+    nohup /opt/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /opt/qingcloud/app-agent/log/app.log &
     waitport 127.0.0.1 9600
     echo "[Start] Logstash is started."
 else

@@ -1,6 +1,6 @@
 [template]
-src = "logstash.conf.tmpl"
-dest = "/data/logstash/config/logstash.conf"
+src = "Gemfile.tmpl"
+dest = "/opt/logstash/Gemfile"
 keys = [
     "/",
 ]

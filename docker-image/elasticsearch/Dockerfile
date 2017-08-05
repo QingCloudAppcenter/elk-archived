@@ -32,7 +32,6 @@ COPY bin/* /opt/elasticsearch/bin/
 COPY confd.d/* /etc/confd/conf.d/
 COPY templates/*  /etc/confd/templates/
 
-VOLUME /opt/elasticsearch/data
 EXPOSE 9200 9300
 
 ENTRYPOINT ["/opt/qingcloud/app-agent/bin/confd"]

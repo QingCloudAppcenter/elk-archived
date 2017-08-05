@@ -146,6 +146,14 @@
                 "default": 0,
                 "range": [0, 1],
                 "required": "yes"
+            }, {
+                "key": "volume_size",
+                "label": "Volume Size",
+                "description": "The volume size for each node",
+                "type": "integer",
+                "default": 10,
+                "min": 10,
+                "required": "yes"
             }]
         }]
     }, {
@@ -157,13 +165,37 @@
             "description": "The role configuration properties of the application",
             "type": "array",
             "properties": [{
-                "key": "conf_content",
-                "label": "conf_content",
-                "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained",
+                "key": "input_conf_content",
+                "label": "input_conf_content",
+                "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in input section",
+                "type": "string",
+                "changeable": true,
+                "default": "http { host => \"0.0.0.0\"  port => 9700 }",
+                "required": "yes"
+            }, {
+                "key": "filter_conf_content",
+                "label": "filter_conf_content",
+                "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in filter section",
                 "type": "string",
                 "changeable": true,
                 "default": "",
-                "required": "yes"
+                "required": "no"
+            }, {
+                "key": "output_conf_content",
+                "label": "output_conf_content",
+                "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output section",
+                "type": "string",
+                "changeable": true,
+                "default": "",
+                "required": "no"
+            }, {
+                "key": "gemfile_append_content",
+                "label": "gemfile_append_content",
+                "description": "This config is used for adding content into Gemfile",
+                "type": "string",
+                "changeable": true,
+                "default": "",
+                "required": "no"
             }]
         }]
     }]

@@ -16,7 +16,7 @@
 #
 # Use a descriptive name for the node:
 #
-# node.name: test
+node.name: {{getv "/cluster/cluster_id"}}-{{getv "/host/sid"}}
 #
 # If omitted the node name will default to the machine's host name
 #
@@ -25,7 +25,7 @@
 # Which directory should be used by logstash and its plugins
 # for any persistent needs. Defaults to LOGSTASH_HOME/data
 #
-# path.data:
+path.data: /data/logstash/data/
 #
 # ------------ Pipeline Settings --------------
 #
@@ -114,7 +114,7 @@
 # If using queue.type: persisted, the directory path where the data files will be stored.
 # Default is path.data/queue
 #
-# path.queue:
+path.queue: /data/logstash/queue
 #
 # If using queue.type: persisted, the page data files size. The queue data consists of
 # append-only data files separated into pages. Default is 250mb
@@ -174,7 +174,7 @@ http.host: "0.0.0.0"
 # Bind port for the metrics REST endpoint, this option also accept a range
 # (9600-9700) and logstash will pick up the first available ports.
 #
-# http.port: 9600-9700
+http.port: 9600
 #
 # ------------ Debugging Settings --------------
 #
@@ -187,9 +187,9 @@ http.host: "0.0.0.0"
 #   * trace
 #
 # log.level: info
-# path.logs:
+path.logs: /data/logstash/logs
 #
 # ------------ Other Settings --------------
 #
 # Where to find custom plugins
-# path.plugins: []
+path.plugins: [/data/logstash/plugins]
