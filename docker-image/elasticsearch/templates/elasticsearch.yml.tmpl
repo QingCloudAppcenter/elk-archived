@@ -92,5 +92,33 @@ gateway.recover_after_nodes: {{max (sub $cluster_size 2) $minimum_master_nodes}}
 action.destructive_requires_name: true
 
 
-http.cors.enabled: true
-http.cors.allow-origin: "*"
+# Discovery Config
+discovery.zen.no_master_block: {{ getv "/env/discovery.zen.no_master_block" }}
+
+
+# Gateway Config
+gateway.expected_nodes: {{$cluster_size}}
+gateway.recover_after_time: {{ getv "/env/gateway.recover_after_time" }}
+
+
+# HTTP Config
+http.cors.enabled: {{ getv "/env/http.cors.enabled" }}
+http.cors.allow-origin: "{{ getv "/env/http.cors.allow-origin" }}"
+
+
+# Indices Config
+indices.queries.cache.size: {{ getv "/env/indices.queries.cache.size" }}
+indices.memory.index_buffer_size: {{ getv "/env/indices.memory.index_buffer_size" }}
+indices.requests.cache.size: {{ getv "/env/indices.requests.cache.size" }}
+
+
+# Script Config
+script.inline: {{ getv "/env/script.inline" }}
+script.stored: {{ getv "/env/script.stored" }}
+script.file: {{ getv "/env/script.file" }}
+
+script.aggs: {{ getv "/env/script.aggs" }}
+script.search: {{ getv "/env/script.search" }}
+script.update: {{ getv "/env/script.update" }}
+
+

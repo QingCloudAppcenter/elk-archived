@@ -24,6 +24,21 @@
                 "cmd": "/opt/elasticsearch/bin/stop.sh"
             }
         },
+        "env": {
+            "discovery.zen.no_master_block": {{env.es_node.discovery.zen.no_master_block}},
+            "gateway.recover_after_time": {{env.es_node.gateway.recover_after_time}},
+            "http.cors.enabled": {{env.es_node.http.cors.enabled}},
+            "http.cors.allow-origin": {{env.es_node.http.cors.allow-origin}},
+            "indices.queries.cache.size": {{env.es_node.indices.queries.cache.size}},
+            "indices.memory.index_buffer_size": {{env.es_node.indices.memory.index_buffer_size}},
+            "indices.requests.cache.size": {{env.es_node.indices.requests.cache.size}},
+            "script.inline": {{env.es_node.script.inline}},
+            "script.stored": {{env.es_node.script.stored}},
+            "script.file": {{env.es_node.script.file}},
+            "script.aggs": {{env.es_node.script.aggs}},
+            "script.search": {{env.es_node.script.search}},
+            "script.update": {{env.es_node.script.update}}
+        },
         "health_check": {
             "enable": true,
             "interval_sec": 60,

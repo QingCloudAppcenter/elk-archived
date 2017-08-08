@@ -25,6 +25,8 @@ RUN set -ex; \
 
 RUN elasticsearch-plugin install -s repository-s3
 RUN elasticsearch-plugin install -s repository-hdfs
+RUN elasticsearch-plugin install -s lang-javascript
+RUN elasticsearch-plugin install -s lang-python
 
 COPY docker-entrypoint.sh /
 
