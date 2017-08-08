@@ -403,6 +403,24 @@
                             ],
                             "required": "yes",
                             "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "Specify the location of extensional dictionary from remote.",
+                            "key": "remote_ext_dict",
+                            "label": "remote_ext_dict",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "Specify the location of extensional stopwords dictionary from remote.",
+                            "key": "remote_ext_stopwords",
+                            "label": "remote_ext_stopwords",
+                            "required": "no",
+                            "type": "string"
                         }
                     ],
                     "type": "array"
