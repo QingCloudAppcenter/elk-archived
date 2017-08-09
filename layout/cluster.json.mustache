@@ -2,207 +2,242 @@
     "name": {{cluster.name}},
     "description": {{cluster.description}},
     "vxnet": {{cluster.vxnet}},
-    "nodes": [{
-        "role": "es_node",
-        "container": {
-            "type": "docker",
-            "image": "dockerhub.qingcloud.com/qingcloud/elasticsearch:v1.0"
-        },
-        "instance_class": {{cluster.es_node.instance_class}},
-        "count": {{cluster.es_node.count}},
-        "cpu": {{cluster.es_node.cpu}},
-        "memory": {{cluster.es_node.memory}},
-        "volume": {
-            "size": {{cluster.es_node.volume_size}}
-        },
-        "vertical_scaling_policy": "sequential",
-        "services": {
-            "start": {
-                "cmd": "/opt/elasticsearch/bin/start.sh"
+    "nodes": [
+        {
+            "role": "es_node",
+            "container": {
+                "type": "docker",
+                "image": "dockerhub.qingcloud.com/qingcloud/elasticsearch:v1.0"
             },
-            "stop": {
-                "cmd": "/opt/elasticsearch/bin/stop.sh"
-            }
-        },
-        "env": {
-            "discovery.zen.no_master_block": {{env.es_node.discovery.zen.no_master_block}},
-            "gateway.recover_after_time": {{env.es_node.gateway.recover_after_time}},
-            "http.cors.enabled": {{env.es_node.http.cors.enabled}},
-            "http.cors.allow-origin": {{env.es_node.http.cors.allow-origin}},
-            "indices.queries.cache.size": {{env.es_node.indices.queries.cache.size}},
-            "indices.memory.index_buffer_size": {{env.es_node.indices.memory.index_buffer_size}},
-            "indices.requests.cache.size": {{env.es_node.indices.requests.cache.size}},
-            "script.inline": {{env.es_node.script.inline}},
-            "script.stored": {{env.es_node.script.stored}},
-            "script.file": {{env.es_node.script.file}},
-            "script.aggs": {{env.es_node.script.aggs}},
-            "script.search": {{env.es_node.script.search}},
-            "script.update": {{env.es_node.script.update}},
-            "remote_ext_dict": {{env.es_node.remote_ext_dict}},
-            "remote_ext_stopwords": {{env.es_node.remote_ext_stopwords}}
-        },
-        "health_check": {
-            "enable": true,
-            "interval_sec": 60,
-            "timeout_sec": 10,
-            "action_timeout_sec": 30,
-            "healthy_threshold": 2,
-            "unhealthy_threshold": 2,
-            "check_cmd": "curl http://localhost:9200/",
-            "action_cmd": "/opt/elasticsearch/bin/restart.sh"
-        },
-        "monitor": {
-            "enable": true,
-            "cmd": "/opt/elasticsearch/bin/monitor.sh",
-            "items": {
-                "cluster_status": {
-                    "unit": "",
-                    "value_type": "str",
-                    "statistics_type": "latest",
-                    "enums": ["green", "yellow", "red"]
+            "instance_class": {{cluster.es_node.instance_class}},
+            "count": {{cluster.es_node.count}},
+            "cpu": {{cluster.es_node.cpu}},
+            "memory": {{cluster.es_node.memory}},
+            "volume": {
+                "size": {{cluster.es_node.volume_size}}
+            },
+            "vertical_scaling_policy": "sequential",
+            "services": {
+                "start": {
+                    "cmd": "/opt/elasticsearch/bin/start.sh"
                 },
-                "cluster_jvm_heap_used_in_percent": {
-                    "unit": "%",
-                    "value_type": "int",
-                    "statistics_type": "avg",
-                    "scale_factor_when_display": 0.1
-                },
-                "cluster_jvm_threads_count": {
-                    "unit": "",
-                    "value_type": "int",
-                    "statistics_type": "latest"
-                },
-                "cluster_indices_count": {
-                    "unit": "",
-                    "value_type": "int",
-                    "statistics_type": "latest"
-                },
-                "cluster_shards_primaries_count": {
-                    "unit": "",
-                    "value_type": "int",
-                    "statistics_type": "latest"
-                },
-                "cluster_shards_replication_count": {
-                    "unit": "",
-                    "value_type": "int",
-                    "statistics_type": "latest"
-                },
-                "cluster_docs_count": {
-                    "unit": "",
-                    "value_type": "int",
-                    "statistics_type": "latest"
-                },
-                "cluster_docs_deleted_count": {
-                    "unit": "",
-                    "value_type": "int",
-                    "statistics_type": "latest"
+                "stop": {
+                    "cmd": "/opt/elasticsearch/bin/stop.sh"
                 }
             },
-            "groups": {
-                "cluster_indices_group": ["cluster_indices_count", "cluster_docs_count", "cluster_docs_deleted_count"],
-                "cluster_shards_group": ["cluster_shards_primaries_count", "cluster_shards_replication_count"]
+            "env": {
+                "discovery.zen.no_master_block": {{env.es_node.discovery.zen.no_master_block}},
+                "gateway.recover_after_time": {{env.es_node.gateway.recover_after_time}},
+                "http.cors.enabled": {{env.es_node.http.cors.enabled}},
+                "http.cors.allow-origin": {{env.es_node.http.cors.allow-origin}},
+                "indices.queries.cache.size": {{env.es_node.indices.queries.cache.size}},
+                "indices.memory.index_buffer_size": {{env.es_node.indices.memory.index_buffer_size}},
+                "indices.requests.cache.size": {{env.es_node.indices.requests.cache.size}},
+                "script.inline": {{env.es_node.script.inline}},
+                "script.stored": {{env.es_node.script.stored}},
+                "script.file": {{env.es_node.script.file}},
+                "script.aggs": {{env.es_node.script.aggs}},
+                "script.search": {{env.es_node.script.search}},
+                "script.update": {{env.es_node.script.update}},
+                "remote_ext_dict": {{env.es_node.remote_ext_dict}},
+                "remote_ext_stopwords": {{env.es_node.remote_ext_stopwords}}
             },
-            "display": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_indices_group", "cluster_shards_group"],
-            "alarm": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count"]
-        }
-    }, {
-        "role": "kbn_node",
-        "container": {
-            "type": "docker",
-            "image": "dockerhub.qingcloud.com/qingcloud/kibana:v1.0"
-        },
-        "instance_class": {{cluster.kbn_node.instance_class}},
-        "count": {{cluster.kbn_node.count}},
-        "cpu": {{cluster.kbn_node.cpu}},
-        "memory": {{cluster.kbn_node.memory}},
-        "vertical_scaling_policy": "sequential",
-        "services": {
-            "start": {
-                "cmd": "/opt/kibana/bin/start.sh"
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:9200/",
+                "action_cmd": "/opt/elasticsearch/bin/restart.sh"
             },
-            "stop": {
-                "cmd": "/opt/kibana/bin/stop.sh"
+            "monitor": {
+                "enable": true,
+                "cmd": "/opt/elasticsearch/bin/monitor.sh",
+                "items": {
+                    "cluster_status": {
+                        "unit": "",
+                        "value_type": "str",
+                        "statistics_type": "latest",
+                        "enums": ["green", "yellow", "red"]
+                    },
+                    "cluster_jvm_heap_used_in_percent": {
+                        "unit": "%",
+                        "value_type": "int",
+                        "statistics_type": "avg",
+                        "scale_factor_when_display": 0.1
+                    },
+                    "cluster_jvm_threads_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_indices_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_shards_primaries_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_shards_replication_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_docs_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_docs_deleted_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    }
+                },
+                "groups": {
+                    "cluster_indices_group": ["cluster_indices_count", "cluster_docs_count", "cluster_docs_deleted_count"],
+                    "cluster_shards_group": ["cluster_shards_primaries_count", "cluster_shards_replication_count"]
+                },
+                "display": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_indices_group", "cluster_shards_group"],
+                "alarm": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count"]
             }
         },
-        "health_check": {
-            "enable": true,
-            "interval_sec": 60,
-            "timeout_sec": 10,
-            "action_timeout_sec": 30,
-            "healthy_threshold": 2,
-            "unhealthy_threshold": 2,
-            "check_cmd": "curl http://localhost:5601/",
-            "action_cmd": "/opt/kibana/bin/restart.sh"
-        }
-    }, {
-        "role": "lst_node",
-        "container": {
-            "type": "docker",
-            "image": "dockerhub.qingcloud.com/hevienzdong/logstash:v1.0"
-        },
-        "instance_class": {{cluster.lst_node.instance_class}},
-        "count": {{cluster.lst_node.count}},
-        "cpu": {{cluster.lst_node.cpu}},
-        "memory": {{cluster.lst_node.memory}},
-        "volume": {
-            "size": {{cluster.lst_node.volume_size}}
-        },
-        "vertical_scaling_policy": "sequential",
-        "user_access": true,
-        "services": {
-            "start": {
-                "cmd": "/opt/logstash/bin/start.sh"
+        {
+            "role": "kbn_node",
+            "container": {
+                "type": "docker",
+                "image": "dockerhub.qingcloud.com/qingcloud/kibana:v1.0"
             },
-            "stop": {
-                "cmd": "/opt/logstash/bin/stop.sh"
+            "instance_class": {{cluster.kbn_node.instance_class}},
+            "count": {{cluster.kbn_node.count}},
+            "cpu": {{cluster.kbn_node.cpu}},
+            "memory": {{cluster.kbn_node.memory}},
+            "vertical_scaling_policy": "sequential",
+            "services": {
+                "start": {
+                    "cmd": "/opt/kibana/bin/start.sh"
+                },
+                "stop": {
+                    "cmd": "/opt/kibana/bin/stop.sh"
+                }
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:5601/",
+                "action_cmd": "/opt/kibana/bin/restart.sh"
             }
         },
-        "env": {
-            "input_conf_content": {{env.lst_node.input_conf_content}},
-            "filter_conf_content": {{env.lst_node.filter_conf_content}},
-            "output_conf_content": {{env.lst_node.output_conf_content}},
-            "gemfile_append_content": {{env.lst_node.gemfile_append_content}}
-        },
-        "health_check": {
-            "enable": true,
-            "interval_sec": 60,
-            "timeout_sec": 10,
-            "action_timeout_sec": 30,
-            "healthy_threshold": 2,
-            "unhealthy_threshold": 2,
-            "check_cmd": "curl http://localhost:9600/",
-            "action_cmd": "/opt/logstash/bin/restart.sh"
-        }
-    }, {
-        "role": "esh_node",
-        "container": {
-            "type": "docker",
-            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch-head:v1.0"
-        },
-        "instance_class": {{cluster.esh_node.instance_class}},
-        "count": {{cluster.esh_node.count}},
-        "cpu": {{cluster.esh_node.cpu}},
-        "memory": {{cluster.esh_node.memory}},
-        "vertical_scaling_policy": "sequential",
-        "services": {
-            "start": {
-                "cmd": "/opt/elasticsearch-head/bin/start.sh"
+        {
+            "role": "lst_node",
+            "container": {
+                "type": "docker",
+                "image": "dockerhub.qingcloud.com/hevienzdong/logstash:v1.0"
             },
-            "stop": {
-                "cmd": "/opt/elasticsearch-head/bin/stop.sh"
+            "instance_class": {{cluster.lst_node.instance_class}},
+            "count": {{cluster.lst_node.count}},
+            "cpu": {{cluster.lst_node.cpu}},
+            "memory": {{cluster.lst_node.memory}},
+            "volume": {
+                "size": {{cluster.lst_node.volume_size}}
+            },
+            "vertical_scaling_policy": "sequential",
+            "user_access": true,
+            "services": {
+                "start": {
+                    "cmd": "/opt/logstash/bin/start.sh"
+                },
+                "stop": {
+                    "cmd": "/opt/logstash/bin/stop.sh"
+                }
+            },
+            "env": {
+                "input_conf_content": {{env.lst_node.input_conf_content}},
+                "filter_conf_content": {{env.lst_node.filter_conf_content}},
+                "output_conf_content": {{env.lst_node.output_conf_content}},
+                "gemfile_append_content": {{env.lst_node.gemfile_append_content}}
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:9600/",
+                "action_cmd": "/opt/logstash/bin/restart.sh"
             }
         },
-        "health_check": {
-            "enable": true,
-            "interval_sec": 60,
-            "timeout_sec": 10,
-            "action_timeout_sec": 30,
-            "healthy_threshold": 2,
-            "unhealthy_threshold": 2,
-            "check_cmd": "curl http://localhost:9100/",
-            "action_cmd": "/opt/elasticsearch-head/bin/restart.sh"
+        {
+            "role": "esh_node",
+            "container": {
+                "type": "docker",
+                "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch-head:v1.0"
+            },
+            "instance_class": {{cluster.esh_node.instance_class}},
+            "count": {{cluster.esh_node.count}},
+            "cpu": {{cluster.esh_node.cpu}},
+            "memory": {{cluster.esh_node.memory}},
+            "vertical_scaling_policy": "sequential",
+            "services": {
+                "start": {
+                    "cmd": "/opt/elasticsearch-head/bin/start.sh"
+                },
+                "stop": {
+                    "cmd": "/opt/elasticsearch-head/bin/stop.sh"
+                }
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:9100/",
+                "action_cmd": "/opt/elasticsearch-head/bin/restart.sh"
+            }
+        },
+        {
+            "role": "eshd_node",
+            "container": {
+                "type": "docker",
+                "image": "dockerhub.qingcloud.com/hevienzdong/elastichd:v1.0"
+            },
+            "instance_class": {{cluster.eshd_node.instance_class}},
+            "count": {{cluster.eshd_node.count}},
+            "cpu": {{cluster.eshd_node.cpu}},
+            "memory": {{cluster.eshd_node.memory}},
+            "vertical_scaling_policy": "sequential",
+            "services": {
+                "start": {
+                    "cmd": "/opt/elastichd/bin/start.sh"
+                },
+                "stop": {
+                    "cmd": "/opt/elastichd/bin/stop.sh"
+                }
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:9800/",
+                "action_cmd": "/opt/elastichd/bin/restart.sh"
+            }
         }
-    }],
+    ],
     "advanced_actions": ["change_vxnet", "scale_horizontal"],
     "endpoints": {
         "es_rpc_port": {
