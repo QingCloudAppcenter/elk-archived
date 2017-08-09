@@ -243,6 +243,72 @@
                         }
                     ],
                     "type": "array"
+                },
+                {
+                    "description": "role-based node properties",
+                    "key": "esh_node",
+                    "label": "ES Head Node",
+                    "properties": [
+                        {
+                            "default": 2,
+                            "description": "CPUs of each node",
+                            "key": "cpu",
+                            "label": "CPU",
+                            "range": [
+                                1,
+                                2,
+                                4,
+                                8,
+                                12,
+                                16
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 4096,
+                            "description": "Memory of each node",
+                            "key": "memory",
+                            "label": "Memory",
+                            "range": [
+                                2048,
+                                4096,
+                                6144,
+                                8192,
+                                12288,
+                                16384,
+                                24576,
+                                32768,
+                                40960,
+                                49152,
+                                65536
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "Number of nodes for the cluster to create",
+                            "key": "count",
+                            "label": "Node Count",
+                            "min": 0,
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+                            "key": "instance_class",
+                            "label": "Instance Class",
+                            "range": [
+                                0,
+                                1
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        }
+                    ],
+                    "type": "array"
                 }
             ],
             "type": "array"

@@ -23,6 +23,7 @@ COPY confd.d/* /etc/confd/conf.d/
 COPY templates/*  /etc/confd/templates/
 
 ADD plugins/elasticsearch-analysis-ik-5.5.1.tar.gz /opt/elasticsearch/plugins
+RUN elasticsearch-plugin install -b com.floragunn:search-guard-5:5.5.1-15
 
 EXPOSE 9200 9300
 

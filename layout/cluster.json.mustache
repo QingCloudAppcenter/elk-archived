@@ -122,12 +122,6 @@
             },
             "stop": {
                 "cmd": "/opt/kibana/bin/stop.sh"
-            },
-            "scale_out": {
-                "cmd": "/opt/kibana/bin/restart.sh"
-            },
-            "scale_in": {
-                "cmd": "/opt/kibana/bin/restart.sh"
             }
         },
         "health_check": {
@@ -161,12 +155,6 @@
             },
             "stop": {
                 "cmd": "/opt/logstash/bin/stop.sh"
-            },
-            "scale_out": {
-                "cmd": "/opt/logstash/bin/restart.sh"
-            },
-            "scale_in": {
-                "cmd": "/opt/logstash/bin/restart.sh"
             }
         },
         "env": {
@@ -184,6 +172,35 @@
             "unhealthy_threshold": 2,
             "check_cmd": "curl http://localhost:9600/",
             "action_cmd": "/opt/logstash/bin/restart.sh"
+        }
+    }, {
+        "role": "esh_node",
+        "container": {
+            "type": "docker",
+            "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch-head:v1.0"
+        },
+        "instance_class": {{cluster.esh_node.instance_class}},
+        "count": {{cluster.esh_node.count}},
+        "cpu": {{cluster.esh_node.cpu}},
+        "memory": {{cluster.esh_node.memory}},
+        "vertical_scaling_policy": "sequential",
+        "services": {
+            "start": {
+                "cmd": "/opt/elasticsearch-head/bin/start.sh"
+            },
+            "stop": {
+                "cmd": "/opt/elasticsearch-head/bin/stop.sh"
+            }
+        },
+        "health_check": {
+            "enable": true,
+            "interval_sec": 60,
+            "timeout_sec": 10,
+            "action_timeout_sec": 30,
+            "healthy_threshold": 2,
+            "unhealthy_threshold": 2,
+            "check_cmd": "curl http://localhost:9100/",
+            "action_cmd": "/opt/elasticsearch-head/bin/restart.sh"
         }
     }],
     "advanced_actions": ["change_vxnet", "scale_horizontal"],
