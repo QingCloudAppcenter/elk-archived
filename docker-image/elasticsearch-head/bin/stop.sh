@@ -4,3 +4,4 @@ if [ $? -ne 0 ]; then
 else
     echo "[=[Stop]=] Lock the file successfully."
 fi
+rm -f /tmp/esh.lock

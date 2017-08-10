@@ -240,16 +240,24 @@
     ],
     "advanced_actions": ["change_vxnet", "scale_horizontal"],
     "endpoints": {
-        "es_rpc_port": {
-            "port": 9300,
-            "protocol": "tcp"
-        },
-        "es_http_port": {
+        "ElasticSearch": {
             "port": 9200,
             "protocol": "http"
         },
-        "kibana_http_port": {
+        "Kibana": {
             "port": 5601,
+            "protocol": "http"
+        },
+        "Logstash": {
+            "port": 9600,
+            "protocol": "http"
+        },
+        "ES Head": {
+            "port": 9100,
+            "protocol": "http"
+        },
+        "ElasticHD": {
+            "port": 9800,
             "protocol": "http"
         }
     }

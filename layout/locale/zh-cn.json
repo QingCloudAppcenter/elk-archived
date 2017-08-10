@@ -13,6 +13,8 @@
     "ElasticSearch Node": "ElasticSearch 节点",
     "Kibana Node": "Kibana 节点",
     "Logstash Node": "Logstash 节点",
+    "ES Head Node": "ES Head 节点",
+    "ES HD Node": "ElasticHD 节点",
     "Node Count": "节点数量",
     "count": "次",
     "esnode_count": "个",

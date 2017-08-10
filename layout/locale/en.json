@@ -15,6 +15,8 @@
     "ElasticSearch Node": "ElasticSearch Node",
     "Kibana Node": "Kibana Node",
     "Logstash Node": "Logstash Node",
+    "ES Head Node": "ES Head Node",
+    "ES HD Node": "ElasticHD Node",
     "Node Count": "Node Count",
     "count": "count",
     "esnode_count": "esnode_count",

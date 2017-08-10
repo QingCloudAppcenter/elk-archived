@@ -1,6 +1,7 @@
 echo "[Start] Preparing for starting kibana..."
 . /opt/kibana/bin/func.sh
 
+
 PID=`pidof node`
 echo "[Start] Kibana pid is ${PID}."
 
