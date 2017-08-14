@@ -1,1 +1,1 @@
-docker push dockerhub.qingcloud.com/hevienzdong/elastichd:v1.0
+docker push dockerhub.qingcloud.com/qingcloud/elastichd:v1.0

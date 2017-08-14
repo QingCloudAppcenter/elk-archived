@@ -1,12 +1,12 @@
 {
     "properties": [
         {
-            "description": "ElasticSearch cluster properties",
+            "description": "ELK cluster properties",
             "key": "cluster",
             "properties": [
                 {
-                    "default": "ElasticSearch",
-                    "description": "The name of the ElasticSearch service",
+                    "default": "ELK",
+                    "description": "The name of the ELK service",
                     "key": "name",
                     "label": "Name",
                     "required": "no",
@@ -14,7 +14,7 @@
                 },
                 {
                     "default": "",
-                    "description": "The description of the ElasticSearch service",
+                    "description": "The description of the ELK service",
                     "key": "description",
                     "label": "Description",
                     "required": "no",
@@ -591,7 +591,7 @@
                         {
                             "changeable": true,
                             "default": "",
-                            "description": "This config is used for adding content into Gemfile",
+                            "description": "This config is used to adding content into Gemfile for logstash",
                             "key": "gemfile_append_content",
                             "label": "gemfile_append_content",
                             "required": "no",

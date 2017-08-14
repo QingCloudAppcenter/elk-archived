@@ -4,4 +4,4 @@ dest = "/opt/kibana/config/Caddyfile"
 keys = [
     "/",
 ]
-reload_cmd = "/opt/kibana/bin/restart_caddy.sh"
+reload_cmd = "/opt/kibana/bin/restart.sh"

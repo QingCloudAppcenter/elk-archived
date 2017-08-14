@@ -1,1 +1,1 @@
-docker build -t dockerhub.qingcloud.com/hevienzdong/elasticsearch-head:v1.0 .
+docker build -t dockerhub.qingcloud.com/qingcloud/elasticsearch-head:v1.0 .

@@ -35,5 +35,16 @@ output = {
     'cluster_docs_count': int(docs['count']),
     'cluster_docs_deleted_count': int(docs['deleted']),
 }
+
+try:
+    conn.request("GET", "/_cluster/health")
+except socket.error as e:
+    sys.exit(1)
+r = conn.getresponse()
+data = r.read()
+d = json.loads(data)
+
+output.update(d)
+
 print(json.dumps(output))
 

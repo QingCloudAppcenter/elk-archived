@@ -1,1 +1,1 @@
-docker push dockerhub.qingcloud.com/hevienzdong/elasticsearch-head:v1.0
+docker push dockerhub.qingcloud.com/qingcloud/elasticsearch-head:v1.0

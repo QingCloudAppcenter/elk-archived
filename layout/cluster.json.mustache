@@ -17,12 +17,16 @@
                 "size": {{cluster.es_node.volume_size}}
             },
             "vertical_scaling_policy": "sequential",
+            "user_access": true,
             "services": {
                 "start": {
                     "cmd": "/opt/elasticsearch/bin/start.sh"
                 },
                 "stop": {
                     "cmd": "/opt/elasticsearch/bin/stop.sh"
+                },
+                "restart": {
+                    "cmd": "/opt/elasticsearch/bin/restart.sh"
                 }
             },
             "env": {
@@ -97,14 +101,54 @@
                         "unit": "",
                         "value_type": "int",
                         "statistics_type": "latest"
+                    },
+                    "number_of_nodes": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "relocating_shards": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "initializing_shards": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "unassigned_shards": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "number_of_pending_tasks": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "number_of_in_flight_fetch": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "task_max_waiting_in_queue_millis": {
+                        "unit": "ms",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "active_shards_percent_as_number": {
+                        "unit": "%",
+                        "value_type": "int",
+                        "statistics_type": "latest"
                     }
                 },
                 "groups": {
-                    "cluster_indices_group": ["cluster_indices_count", "cluster_docs_count", "cluster_docs_deleted_count"],
-                    "cluster_shards_group": ["cluster_shards_primaries_count", "cluster_shards_replication_count"]
+                    "cluster_docs_group": ["cluster_docs_count", "cluster_docs_deleted_count"],
+                    "cluster_shards_group": ["cluster_shards_primaries_count", "cluster_shards_replication_count", "relocating_shards", "initializing_shards", "unassigned_shards"]
                 },
-                "display": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_indices_group", "cluster_shards_group"],
-                "alarm": ["cluster_status", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count"]
+                "display": ["cluster_status", "number_of_nodes", "cluster_indices_count", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_docs_group", "cluster_shards_group", "number_of_pending_tasks", "number_of_in_flight_fetch", "task_max_waiting_in_queue_millis", "active_shards_percent_as_number"],
+                "alarm": ["cluster_status", "number_of_nodes", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "relocating_shards", "unassigned_shards", "number_of_pending_tasks", "number_of_in_flight_fetch", "task_max_waiting_in_queue_millis", "active_shards_percent_as_number"]
             }
         },
         {
@@ -141,7 +185,7 @@
             "role": "lst_node",
             "container": {
                 "type": "docker",
-                "image": "dockerhub.qingcloud.com/hevienzdong/logstash:v1.0"
+                "image": "dockerhub.qingcloud.com/qingcloud/logstash:v1.0"
             },
             "instance_class": {{cluster.lst_node.instance_class}},
             "count": {{cluster.lst_node.count}},
@@ -181,7 +225,7 @@
             "role": "esh_node",
             "container": {
                 "type": "docker",
-                "image": "dockerhub.qingcloud.com/hevienzdong/elasticsearch-head:v1.0"
+                "image": "dockerhub.qingcloud.com/qingcloud/elasticsearch-head:v1.0"
             },
             "instance_class": {{cluster.esh_node.instance_class}},
             "count": {{cluster.esh_node.count}},
@@ -211,7 +255,7 @@
             "role": "eshd_node",
             "container": {
                 "type": "docker",
-                "image": "dockerhub.qingcloud.com/hevienzdong/elastichd:v1.0"
+                "image": "dockerhub.qingcloud.com/qingcloud/elastichd:v1.0"
             },
             "instance_class": {{cluster.eshd_node.instance_class}},
             "count": {{cluster.eshd_node.count}},
