@@ -1,0 +1,608 @@
+{
+    "properties": [
+        {
+            "description": "ELK cluster properties",
+            "key": "cluster",
+            "properties": [
+                {
+                    "default": "ELK",
+                    "description": "The name of the ELK service",
+                    "key": "name",
+                    "label": "Name",
+                    "required": "no",
+                    "type": "string"
+                },
+                {
+                    "default": "",
+                    "description": "The description of the ELK service",
+                    "key": "description",
+                    "label": "Description",
+                    "required": "no",
+                    "type": "string"
+                },
+                {
+                    "default": "",
+                    "description": "Choose a vxnet to join",
+                    "key": "vxnet",
+                    "label": "VxNet",
+                    "required": "yes",
+                    "type": "string"
+                },
+                {
+                    "description": "role-based node properties",
+                    "key": "es_node",
+                    "label": "ElasticSearch Node",
+                    "properties": [
+                        {
+                            "default": 2,
+                            "description": "CPUs of each node",
+                            "key": "cpu",
+                            "label": "CPU",
+                            "range": [
+                                1,
+                                2,
+                                4,
+                                8,
+                                12,
+                                16
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 4096,
+                            "description": "Memory of each node",
+                            "key": "memory",
+                            "label": "Memory",
+                            "range": [
+                                2048,
+                                4096,
+                                6144,
+                                8192,
+                                12288,
+                                16384,
+                                24576,
+                                32768,
+                                40960,
+                                49152,
+                                65536
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 3,
+                            "description": "Number of nodes for the cluster to create",
+                            "key": "count",
+                            "label": "Node Count",
+                            "min": 3,
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+                            "key": "instance_class",
+                            "label": "Instance Class",
+                            "range": [
+                                0,
+                                1
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 10,
+                            "description": "The volume size for each node",
+                            "key": "volume_size",
+                            "label": "Volume Size",
+                            "min": 10,
+                            "required": "yes",
+                            "type": "integer"
+                        }
+                    ],
+                    "type": "array"
+                },
+                {
+                    "description": "role-based node properties",
+                    "key": "kbn_node",
+                    "label": "Kibana Node",
+                    "properties": [
+                        {
+                            "default": 2,
+                            "description": "CPUs of each node",
+                            "key": "cpu",
+                            "label": "CPU",
+                            "range": [
+                                1,
+                                2,
+                                4,
+                                8,
+                                12,
+                                16
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 4096,
+                            "description": "Memory of each node",
+                            "key": "memory",
+                            "label": "Memory",
+                            "range": [
+                                2048,
+                                4096,
+                                6144,
+                                8192,
+                                12288,
+                                16384,
+                                24576,
+                                32768,
+                                40960,
+                                49152,
+                                65536
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 1,
+                            "description": "Number of nodes for the cluster to create",
+                            "key": "count",
+                            "label": "Node Count",
+                            "min": 0,
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+                            "key": "instance_class",
+                            "label": "Instance Class",
+                            "range": [
+                                0,
+                                1
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        }
+                    ],
+                    "type": "array"
+                },
+                {
+                    "description": "role-based node properties",
+                    "key": "lst_node",
+                    "label": "Logstash Node",
+                    "properties": [
+                        {
+                            "default": 2,
+                            "description": "CPUs of each node",
+                            "key": "cpu",
+                            "label": "CPU",
+                            "range": [
+                                1,
+                                2,
+                                4,
+                                8,
+                                12,
+                                16
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 4096,
+                            "description": "Memory of each node",
+                            "key": "memory",
+                            "label": "Memory",
+                            "range": [
+                                2048,
+                                4096,
+                                6144,
+                                8192,
+                                12288,
+                                16384,
+                                24576,
+                                32768,
+                                40960,
+                                49152,
+                                65536
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 1,
+                            "description": "Number of nodes for the cluster to create",
+                            "key": "count",
+                            "label": "Node Count",
+                            "min": 0,
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+                            "key": "instance_class",
+                            "label": "Instance Class",
+                            "range": [
+                                0,
+                                1
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 10,
+                            "description": "The volume size for each node",
+                            "key": "volume_size",
+                            "label": "Volume Size",
+                            "min": 10,
+                            "required": "yes",
+                            "type": "integer"
+                        }
+                    ],
+                    "type": "array"
+                },
+                {
+                    "description": "role-based node properties",
+                    "key": "esh_node",
+                    "label": "ES Head Node",
+                    "properties": [
+                        {
+                            "default": 2,
+                            "description": "CPUs of each node",
+                            "key": "cpu",
+                            "label": "CPU",
+                            "range": [
+                                1,
+                                2,
+                                4,
+                                8,
+                                12,
+                                16
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 4096,
+                            "description": "Memory of each node",
+                            "key": "memory",
+                            "label": "Memory",
+                            "range": [
+                                2048,
+                                4096,
+                                6144,
+                                8192,
+                                12288,
+                                16384,
+                                24576,
+                                32768,
+                                40960,
+                                49152,
+                                65536
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 1,
+                            "description": "Number of nodes for the cluster to create",
+                            "key": "count",
+                            "label": "Node Count",
+                            "min": 0,
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+                            "key": "instance_class",
+                            "label": "Instance Class",
+                            "range": [
+                                0,
+                                1
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        }
+                    ],
+                    "type": "array"
+                },
+                {
+                    "description": "role-based node properties",
+                    "key": "eshd_node",
+                    "label": "ES HD Node",
+                    "properties": [
+                        {
+                            "default": 2,
+                            "description": "CPUs of each node",
+                            "key": "cpu",
+                            "label": "CPU",
+                            "range": [
+                                1,
+                                2,
+                                4,
+                                8,
+                                12,
+                                16
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 4096,
+                            "description": "Memory of each node",
+                            "key": "memory",
+                            "label": "Memory",
+                            "range": [
+                                2048,
+                                4096,
+                                6144,
+                                8192,
+                                12288,
+                                16384,
+                                24576,
+                                32768,
+                                40960,
+                                49152,
+                                65536
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 1,
+                            "description": "Number of nodes for the cluster to create",
+                            "key": "count",
+                            "label": "Node Count",
+                            "min": 0,
+                            "required": "yes",
+                            "type": "integer"
+                        },
+                        {
+                            "default": 0,
+                            "description": "The instance type for the cluster to run, such as high performance, high performance plus",
+                            "key": "instance_class",
+                            "label": "Instance Class",
+                            "range": [
+                                0,
+                                1
+                            ],
+                            "required": "yes",
+                            "type": "integer"
+                        }
+                    ],
+                    "type": "array"
+                }
+            ],
+            "type": "array"
+        },
+        {
+            "description": "application configuration properties",
+            "key": "env",
+            "properties": [
+                {
+                    "description": "The role configuration properties of the application",
+                    "key": "es_node",
+                    "properties": [
+                        {
+                            "changeable": true,
+                            "default": "write",
+                            "description": "The discovery.zen.no_master_block settings controls what operations should be rejected when there is no active master.",
+                            "key": "discovery.zen.no_master_block",
+                            "label": "discovery.zen.no_master_block",
+                            "range": [
+                                "all",
+                                "write"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "5m",
+                            "description": "If the expected number of nodes is not achieved, the recovery process waits for the configured amount of time before trying to recover regardless. Defaults to 5m if one of the expected_nodes settings is configured.",
+                            "key": "gateway.recover_after_time",
+                            "label": "gateway.recover_after_time",
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "true",
+                            "description": "Enable or disable cross-origin resource sharing, i.e. whether a browser on another origin can execute requests against Elasticsearch.",
+                            "key": "http.cors.enabled",
+                            "label": "http.cors.enabled",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "*",
+                            "description": "Which origins to allow.",
+                            "key": "http.cors.allow-origin",
+                            "label": "http.cors.allow-origin",
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "10%",
+                            "description": "Controls the memory size for the filter cache , defaults to 10%. Accepts either a percentage value, like 5%, or an exact value, like 512mb.",
+                            "key": "indices.queries.cache.size",
+                            "label": "indices.queries.cache.size",
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "10%",
+                            "description": "Accepts either a percentage or a byte size value. It defaults to 10%, meaning that 10% of the total heap allocated to a node will be used as the indexing buffer size shared across all shards.",
+                            "key": "indices.memory.index_buffer_size",
+                            "label": "indices.memory.index_buffer_size",
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "2%",
+                            "description": "The shard-level request cache module caches the local results on each shard. The cache is managed at the node level, and has a default maximum size of 1% of the heap.",
+                            "key": "indices.requests.cache.size",
+                            "label": "indices.requests.cache.size",
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "true",
+                            "description": "Specify whether scripts with inline type are allowed.",
+                            "key": "script.inline",
+                            "label": "script.inline",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "true",
+                            "description": "Specify whether scripts with stored type are allowed.",
+                            "key": "script.stored",
+                            "label": "script.stored",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "false",
+                            "description": "Specify whether scripts with file type are allowed.",
+                            "key": "script.file",
+                            "label": "script.file",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "true",
+                            "description": "Specify whether scripts can be executed in aggregations context.",
+                            "key": "script.aggs",
+                            "label": "script.aggs",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "true",
+                            "description": "Specify whether scripts can be executed in search context.",
+                            "key": "script.search",
+                            "label": "script.search",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "true",
+                            "description": "Specify whether scripts can be executed in update context.",
+                            "key": "script.update",
+                            "label": "script.update",
+                            "range": [
+                                "true",
+                                "false"
+                            ],
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "Specify the location of extensional dictionary from remote.",
+                            "key": "remote_ext_dict",
+                            "label": "remote_ext_dict",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "Specify the location of extensional stopwords dictionary from remote.",
+                            "key": "remote_ext_stopwords",
+                            "label": "remote_ext_stopwords",
+                            "required": "no",
+                            "type": "string"
+                        }
+                    ],
+                    "type": "array"
+                },
+                {
+                    "description": "The role configuration properties of the application",
+                    "key": "lst_node",
+                    "properties": [
+                        {
+                            "changeable": true,
+                            "default": "http { host => \"0.0.0.0\"  port => 9700 }",
+                            "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in input section",
+                            "key": "input_conf_content",
+                            "label": "input_conf_content",
+                            "required": "yes",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in filter section",
+                            "key": "filter_conf_content",
+                            "label": "filter_conf_content",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output section",
+                            "key": "output_conf_content",
+                            "label": "output_conf_content",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "This config is used to adding content into Gemfile for logstash",
+                            "key": "gemfile_append_content",
+                            "label": "gemfile_append_content",
+                            "required": "no",
+                            "type": "string"
+                        }
+                    ],
+                    "type": "array"
+                }
+            ],
+            "type": "array"
+        }
+    ],
+    "type": "array"
+}
