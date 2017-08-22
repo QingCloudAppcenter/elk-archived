@@ -10,7 +10,7 @@ echo "[Start] Logstash pid is ${PID}."
 if [ -z "$PID" ]; then
     echo "[Start] Starting logstash..."
     mkdir -p /data/logstash/plugins/
-    nohup /opt/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /opt/qingcloud/app-agent/log/app.log &
+    nohup /opt/logstash/bin/logstash -f /data/logstash/config/logstash.conf >> /opt/qingcloud/app-agent/log/app.log 2>&1 &
     waitport 127.0.0.1 9600
     echo "[Start] Logstash is started."
 else

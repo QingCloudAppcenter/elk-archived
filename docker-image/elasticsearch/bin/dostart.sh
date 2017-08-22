@@ -19,7 +19,8 @@ echo "[Start] Elasticsearch pid is ${PID}."
 
 if [ -z "$PID" ]; then
     echo "[Start] Starting elasticsearch..."
-    nohup /docker-entrypoint.sh elasticsearch >> /opt/qingcloud/app-agent/log/app.log &
+    wait_dir_own_by_user /opt/elasticsearch elastics
+    nohup /docker-entrypoint.sh elasticsearch >> /opt/qingcloud/app-agent/log/app.log 2>&1 &
     waitport 127.0.0.1 9200
     echo "[Start] Elasticsearch is started successfully."
 else

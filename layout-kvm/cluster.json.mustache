@@ -8,7 +8,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-ykd2gcnk"
+                "image": "img-vhygmvqc"
             },
             "instance_class": {{cluster.es_node.instance_class}},
             "count": {{cluster.es_node.count}},
@@ -21,16 +21,16 @@
             "user_access": true,
             "services": {
                 "init": {
-                    "cmd": "/opt/common/bin/init.sh elasticsearch"
+                    "cmd": "/opt/common/bin/init.sh elasticsearch:v1.0"
                 },
                 "start": {
-                    "cmd": "/opt/common/bin/start.sh elasticsearch"
+                    "cmd": "/opt/common/bin/start.sh elasticsearch:v1.0"
                 },
                 "stop": {
-                    "cmd": "/opt/common/bin/stop.sh elasticsearch"
+                    "cmd": "/opt/common/bin/stop.sh elasticsearch:v1.0"
                 },
                 "restart": {
-                    "cmd": "/opt/common/bin/restart.sh elasticsearch"
+                    "cmd": "/opt/common/bin/restart.sh elasticsearch:v1.0"
                 }
             },
             "env": {
@@ -58,11 +58,11 @@
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
                 "check_cmd": "curl http://localhost:9200/",
-                "action_cmd": "/opt/common/bin/restart.sh elasticsearch"
+                "action_cmd": "/opt/common/bin/restart.sh elasticsearch:v1.0"
             },
             "monitor": {
                 "enable": true,
-                "cmd": "/opt/common/bin/monitor.sh elasticsearch",
+                "cmd": "/opt/common/bin/monitor.sh elasticsearch:v1.0",
                 "items": {
                     "cluster_status": {
                         "unit": "",
@@ -160,7 +160,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-ykd2gcnk"
+                "image": "img-vhygmvqc"
             },
             "instance_class": {{cluster.kbn_node.instance_class}},
             "count": {{cluster.kbn_node.count}},
@@ -169,14 +169,18 @@
             "vertical_scaling_policy": "sequential",
             "services": {
                 "init": {
-                    "cmd": "/opt/common/bin/init.sh kibana"
+                    "cmd": "/opt/common/bin/init.sh kibana:v1.0"
                 },
                 "start": {
-                    "cmd": "/opt/common/bin/start.sh kibana"
+                    "cmd": "/opt/common/bin/start.sh kibana:v1.0"
                 },
                 "stop": {
-                    "cmd": "/opt/common/bin/stop.sh kibana"
+                    "cmd": "/opt/common/bin/stop.sh kibana:v1.0"
                 }
+            },
+            "env": {
+                "enable_elasticsearch_head": {{env.kbn_node.enable_elasticsearch_head}},
+                "enable_elastichd": {{env.kbn_node.enable_elastichd}}
             },
             "health_check": {
                 "enable": true,
@@ -186,7 +190,7 @@
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
                 "check_cmd": "curl http://localhost:5601/",
-                "action_cmd": "/opt/common/bin/restart.sh kibana"
+                "action_cmd": "/opt/common/bin/restart.sh kibana:v1.0"
             }
         },
         {
@@ -194,7 +198,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-ykd2gcnk"
+                "image": "img-vhygmvqc"
             },
             "instance_class": {{cluster.lst_node.instance_class}},
             "count": {{cluster.lst_node.count}},
@@ -207,16 +211,16 @@
             "user_access": true,
             "services": {
                 "init": {
-                    "cmd": "/opt/common/bin/init.sh logstash"
+                    "cmd": "/opt/common/bin/init.sh logstash:v1.0"
                 },
                 "start": {
-                    "cmd": "/opt/common/bin/start.sh logstash"
+                    "cmd": "/opt/common/bin/start.sh logstash:v1.0"
                 },
                 "stop": {
-                    "cmd": "/opt/common/bin/stop.sh logstash"
+                    "cmd": "/opt/common/bin/stop.sh logstash:v1.0"
                 },
                 "restart": {
-                    "cmd": "/opt/common/bin/restart.sh logstash"
+                    "cmd": "/opt/common/bin/restart.sh logstash:v1.0"
                 }
             },
             "env": {
@@ -233,75 +237,7 @@
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
                 "check_cmd": "curl http://localhost:9600/",
-                "action_cmd": "/opt/common/bin/restart.sh logstash"
-            }
-        },
-        {
-            "role": "esh_node",
-            "container": {
-                "type": "kvm",
-                "zone": "pek3a",
-                "image": "img-ykd2gcnk"
-            },
-            "instance_class": {{cluster.esh_node.instance_class}},
-            "count": {{cluster.esh_node.count}},
-            "cpu": {{cluster.esh_node.cpu}},
-            "memory": {{cluster.esh_node.memory}},
-            "vertical_scaling_policy": "sequential",
-            "services": {
-                "init": {
-                    "cmd": "/opt/common/bin/init.sh elasticsearch-head"
-                },
-                "start": {
-                    "cmd": "/opt/common/bin/start.sh elasticsearch-head"
-                },
-                "stop": {
-                    "cmd": "/opt/common/bin/stop.sh elasticsearch-head"
-                }
-            },
-            "health_check": {
-                "enable": true,
-                "interval_sec": 60,
-                "timeout_sec": 10,
-                "action_timeout_sec": 30,
-                "healthy_threshold": 2,
-                "unhealthy_threshold": 2,
-                "check_cmd": "curl http://localhost:9100/",
-                "action_cmd": "/opt/common/bin/restart.sh elasticsearch-head"
-            }
-        },
-        {
-            "role": "eshd_node",
-            "container": {
-                "type": "kvm",
-                "zone": "pek3a",
-                "image": "img-ykd2gcnk"
-            },
-            "instance_class": {{cluster.eshd_node.instance_class}},
-            "count": {{cluster.eshd_node.count}},
-            "cpu": {{cluster.eshd_node.cpu}},
-            "memory": {{cluster.eshd_node.memory}},
-            "vertical_scaling_policy": "sequential",
-            "services": {
-                "init": {
-                    "cmd": "/opt/common/bin/init.sh elastichd"
-                },
-                "start": {
-                    "cmd": "/opt/common/bin/start.sh elastichd"
-                },
-                "stop": {
-                    "cmd": "/opt/common/bin/stop.sh elastichd"
-                }
-            },
-            "health_check": {
-                "enable": true,
-                "interval_sec": 60,
-                "timeout_sec": 10,
-                "action_timeout_sec": 30,
-                "healthy_threshold": 2,
-                "unhealthy_threshold": 2,
-                "check_cmd": "curl http://localhost:9800/",
-                "action_cmd": "/opt/common/bin/restart.sh elastichd"
+                "action_cmd": "/opt/common/bin/restart.sh logstash:v1.0"
             }
         }
     ],
