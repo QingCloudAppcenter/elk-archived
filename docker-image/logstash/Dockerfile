@@ -1,4 +1,4 @@
-FROM dockerhub.qingcloud.com/qingcloud/confd-jre8:v0.13.7
+FROM dockerhub.qingcloud.com/qingcloud/confd-jdk8:v0.13.7
 
 WORKDIR /opt/logstash
 

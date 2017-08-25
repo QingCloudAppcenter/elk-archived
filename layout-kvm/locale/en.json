@@ -60,6 +60,10 @@
     "cluster_shards_group": "cluster_shards_group",
     "cluster_shards_primaries_count": "cluster_shards_primaries_count",
     "cluster_shards_replication_count": "cluster_shards_replication_count",
-    "initializing_shards": "initializing_shards"
+    "initializing_shards": "initializing_shards",
+    "The ip of one of logstash node used to collect slowlog on elasticsearch.": "The ip of one of logstash node used to collect slowlog on elasticsearch.",
+    "Whether to enable elasticsearch-head.": "Whether to enable elasticsearch-head.",
+    "Whether to enable ElasticHD.": "Whether to enable ElasticHD.",
+    "collect_slowlog": "collect_slowlog"
 }
 

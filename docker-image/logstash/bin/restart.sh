@@ -5,5 +5,5 @@ if [ $? -ne 0 ]; then
     echo "[=[Restart]=] Can't lock the file."
 else
     echo "[=[Restart]=] Lock the file successfully."
+    rm -f /tmp/lst.lock
 fi
-rm -f /tmp/lst.lock

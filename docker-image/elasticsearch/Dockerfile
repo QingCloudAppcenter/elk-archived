@@ -1,4 +1,4 @@
-FROM dockerhub.qingcloud.com/qingcloud/confd-jre8:v0.13.7
+FROM dockerhub.qingcloud.com/qingcloud/confd-jdk8:v0.13.7
 
 WORKDIR /opt/elasticsearch
 RUN addgroup -S elasticsearch && adduser -S -G elasticsearch elasticsearch
@@ -16,13 +16,15 @@ RUN elasticsearch-plugin install -s repository-hdfs
 RUN elasticsearch-plugin install -s lang-javascript
 RUN elasticsearch-plugin install -s lang-python
 
+ADD plugins/elasticsearch-analysis-ik-5.5.1.tar.gz /opt/elasticsearch/plugins
+RUN mkdir -p /opt/elasticsearch/plugins/analysis-ik/config/custom
+COPY dicts/* /opt/elasticsearch/plugins/analysis-ik/config/custom/
+
 COPY docker-entrypoint.sh /
 
 COPY bin/* /opt/elasticsearch/bin/
 COPY confd.d/* /etc/confd/conf.d/
 COPY templates/*  /etc/confd/templates/
-
-ADD plugins/elasticsearch-analysis-ik-5.5.1.tar.gz /opt/elasticsearch/plugins
 
 EXPOSE 9200 9300
 

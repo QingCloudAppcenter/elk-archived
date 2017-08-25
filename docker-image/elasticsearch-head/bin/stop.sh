@@ -5,5 +5,5 @@ if [ $? -ne 0 ]; then
     echo "[=[Stop]=] Can't lock the file."
 else
     echo "[=[Stop]=] Lock the file successfully."
+    rm -f /tmp/esh.lock
 fi
-rm -f /tmp/esh.lock

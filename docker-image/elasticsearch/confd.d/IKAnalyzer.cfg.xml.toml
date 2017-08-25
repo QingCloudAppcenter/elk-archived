@@ -4,4 +4,4 @@ dest = "/opt/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml"
 keys = [
     "/",
 ]
-reload_cmd = "/opt/elasticsearch/bin/restart.sh"
+reload_cmd = "/opt/elasticsearch/bin/changeowner.sh"

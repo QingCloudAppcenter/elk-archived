@@ -258,6 +258,15 @@
                     "properties": [
                         {
                             "changeable": true,
+                            "default": "",
+                            "description": "The ip of one of logstash node used to collect slowlog on elasticsearch.",
+                            "key": "logstash_node_ip",
+                            "label": "logstash_node_ip",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
                             "default": "write",
                             "description": "The discovery.zen.no_master_block settings controls what operations should be rejected when there is no active master.",
                             "key": "discovery.zen.no_master_block",

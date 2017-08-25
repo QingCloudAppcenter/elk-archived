@@ -8,7 +8,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-vhygmvqc"
+                "image": "img-0fo5wkte"
             },
             "instance_class": {{cluster.es_node.instance_class}},
             "count": {{cluster.es_node.count}},
@@ -18,7 +18,6 @@
                 "size": {{cluster.es_node.volume_size}}
             },
             "vertical_scaling_policy": "sequential",
-            "user_access": true,
             "services": {
                 "init": {
                     "cmd": "/opt/common/bin/init.sh elasticsearch:v1.0"
@@ -31,9 +30,14 @@
                 },
                 "restart": {
                     "cmd": "/opt/common/bin/restart.sh elasticsearch:v1.0"
+                },
+                "collect_slowlog": {
+                    "cmd": "/opt/common/bin/collect_slowlog.sh",
+                    "type": "custom"
                 }
             },
             "env": {
+                "logstash_node_ip": {{env.es_node.logstash_node_ip}},
                 "discovery.zen.no_master_block": {{env.es_node.discovery.zen.no_master_block}},
                 "gateway.recover_after_time": {{env.es_node.gateway.recover_after_time}},
                 "http.cors.enabled": {{env.es_node.http.cors.enabled}},
@@ -160,7 +164,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-vhygmvqc"
+                "image": "img-0fo5wkte"
             },
             "instance_class": {{cluster.kbn_node.instance_class}},
             "count": {{cluster.kbn_node.count}},
@@ -198,7 +202,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-vhygmvqc"
+                "image": "img-0fo5wkte"
             },
             "instance_class": {{cluster.lst_node.instance_class}},
             "count": {{cluster.lst_node.count}},
