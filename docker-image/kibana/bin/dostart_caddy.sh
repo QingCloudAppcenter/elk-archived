@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Start] Preparing for starting caddy..."
 . /opt/kibana/bin/func.sh
 

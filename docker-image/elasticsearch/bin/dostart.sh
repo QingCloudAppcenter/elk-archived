@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 echo "[Start] Preparing for starting elasticsearch..."

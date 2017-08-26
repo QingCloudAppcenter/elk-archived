@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Restart] Restarting head..." >> /opt/qingcloud/app-agent/log/app.log
 /opt/elasticsearch-head/bin/dostop.sh >> /opt/qingcloud/app-agent/log/app.log && \
 sleep 1 && \

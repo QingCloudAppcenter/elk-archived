@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Stop] Preparing for stoping caddy..."
 PID=`pidof caddy`
 echo "[Stop] Caddy pid is ${PID}."

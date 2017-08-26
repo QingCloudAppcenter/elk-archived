@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Stop] Preparing for stoping ElasticHD..."
 PID=`pidof ElasticHD`
 echo "[Stop] ElasticHD pid is ${PID}."

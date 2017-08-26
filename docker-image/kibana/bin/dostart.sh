@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Start] Preparing for starting kibana..."
 . /opt/kibana/bin/func.sh
 

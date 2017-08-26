@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Start] Preparing for starting ElasticHD..."
 . /opt/elastichd/bin/func.sh
 

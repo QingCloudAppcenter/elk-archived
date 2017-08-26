@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Stop] Preparing for stoping Head..."
 PID=`pidof grunt`
 echo "[Stop] Head pid is ${PID}."

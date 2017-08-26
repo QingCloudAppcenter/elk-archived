@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Start] Preparing for starting caddy..."
 . /opt/logstash/bin/func.sh
 

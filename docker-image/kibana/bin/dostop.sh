@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Stop] Preparing for stoping kibana..."
 PID=`pidof node`
 echo "[Stop] Kibana pid is ${PID}."

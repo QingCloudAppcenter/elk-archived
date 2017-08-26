@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Start] Preparing for starting head..."
 . /opt/elasticsearch-head/bin/func.sh
 
