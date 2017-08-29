@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+{{if exists "/env/enable_elasticsearch_head"}}
+
+{{if eq (getv "/env/enable_elasticsearch_head") "true"}}
+/opt/common/bin/start.sh elasticsearch-head:v1.0 
+{{else}}
+/opt/common/bin/stop.sh elasticsearch-head:v1.0
+{{end}}
+
+exit 0
+
+{{end}}

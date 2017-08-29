@@ -1,0 +1,5 @@
+[template]
+src = "collect_slowlog.sh.tmpl"
+dest = "/opt/common/bin/collect_slowlog.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/collect_slowlog.sh"
