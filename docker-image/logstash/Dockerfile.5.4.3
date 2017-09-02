@@ -5,7 +5,7 @@ WORKDIR /opt/logstash
 ENV LST_VERSION="logstash-5.4.3" \
     PATH="/opt/logstash/bin:$PATH"
 
-RUN apk add --no-cache bash curl
+RUN apk add --no-cache bash curl libc6-compat
 
 ADD $LST_VERSION.tar.gz /opt
 RUN rm -rf /opt/logstash && mv /opt/$LST_VERSION /opt/logstash
@@ -13,7 +13,7 @@ RUN rm -rf /opt/logstash && mv /opt/$LST_VERSION /opt/logstash
 RUN sed -i 's,source "https://rubygems.org",source "https://gems.ruby-china.org/",' /opt/logstash/Gemfile
 
 RUN JRUBY_OPTS="-J-Djava.security.egd=file:/dev/urandom" logstash-plugin install logstash-input-qingstor
-#RUN JRUBY_OPTS="-J-Djava.security.egd=file:/dev/urandom" logstash-plugin install logstash-output-qingstor
+RUN JRUBY_OPTS="-J-Djava.security.egd=file:/dev/urandom" logstash-plugin install logstash-output-qingstor
 
 COPY config/* /opt/logstash/config/
 COPY bin/* /opt/logstash/bin/

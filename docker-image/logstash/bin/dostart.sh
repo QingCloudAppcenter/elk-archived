@@ -10,6 +10,10 @@ PID=`ps -ef|grep '/data/logstash/config/logstash.conf' | grep -v 'grep /data/log
 echo "[Start] Logstash pid is ${PID}."
 
 if [ -z "$PID" ]; then
+    if [ ! -f /data/logstash/config/logstash.conf.lock ]; then
+        cp -f /data/logstash/config/logstash.conf.sample /data/logstash/config/logstash.conf
+    fi
+
     echo "[Start] Starting logstash..."
     mkdir -p /data/logstash/plugins/
     export LS_JAVA_OPTS="-Djava.security.egd=file:/dev/urandom"

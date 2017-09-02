@@ -60,9 +60,9 @@
     "cluster_shards_primaries_count": "集群主分片数",
     "cluster_shards_replication_count": "集群副本分片数",
     "initializing_shards": "初始化中的分片数",
-    "The ip of one of logstash node used to collect slowlog on elasticsearch.": "用于收集ES慢日志的logstash节点中的一个的IP地址",
+    "The ip of one of logstash node used to collect logs on elasticsearch.": "用于收集ES日志的logstash节点的IP地址",
     "Whether to enable elasticsearch-head.": "是否启用elasticsearch-head",
     "Whether to enable ElasticHD.": "是否启用ElasticHD",
-    "collect_slowlog": "收集ES慢日志"
+    "collect_es_log": "收集ES日志"
 }
 

@@ -150,8 +150,7 @@
                             "description": "Number of nodes for the cluster to create",
                             "key": "count",
                             "label": "Node Count",
-                            "min": 0,
-                            "max": 1,
+                            "range": [0, 1],
                             "required": "yes",
                             "type": "integer"
                         },
@@ -218,7 +217,6 @@
                             "key": "count",
                             "label": "Node Count",
                             "min": 0,
-                            "max": 1,
                             "required": "yes",
                             "type": "integer"
                         },
@@ -260,7 +258,7 @@
                         {
                             "changeable": true,
                             "default": "",
-                            "description": "The ip of one of logstash node used to collect slowlog on elasticsearch.",
+                            "description": "The ip of one of logstash node used to collect logs on elasticsearch.",
                             "key": "logstash_node_ip",
                             "label": "logstash_node_ip",
                             "required": "no",

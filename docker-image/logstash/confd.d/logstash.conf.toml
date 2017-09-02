@@ -1,7 +1,6 @@
 [template]
 src = "logstash.conf.tmpl"
-dest = "/data/logstash/config/logstash.conf"
+dest = "/data/logstash/config/logstash.conf.sample"
 keys = [
     "/",
 ]
-reload_cmd = "/opt/logstash/bin/restart.sh"

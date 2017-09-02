@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "[Restart] Restarting logstash..." >> /opt/qingcloud/app-agent/log/app.log
 /opt/logstash/bin/dostop.sh >> /opt/qingcloud/app-agent/log/app.log && \
 sleep 1 && \

@@ -121,3 +121,8 @@ script.aggs: {{ getv "/env/script.aggs" }}
 script.search: {{ getv "/env/script.search" }}
 script.update: {{ getv "/env/script.update" }}
 
+
+discovery.zen.ping_timeout: 5s
+discovery.zen.fd.ping_interval: 1s
+discovery.zen.fd.ping_timeout: 30s
+discovery.zen.fd.ping_retries: 3

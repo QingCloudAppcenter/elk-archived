@@ -8,7 +8,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-jys5vyva"
+                "image": "img-sznrwoe9"
             },
             "instance_class": {{cluster.es_node.instance_class}},
             "count": {{cluster.es_node.count}},
@@ -29,10 +29,10 @@
                     "cmd": "/opt/common/bin/stop.sh elasticsearch:v1.0"
                 },
                 "restart": {
-                    "cmd": "/opt/common/bin/restart.sh elasticsearch:v1.0"
+                    "cmd": "/opt/common/bin/dorestart.sh elasticsearch:v1.0"
                 },
-                "collect_slowlog": {
-                    "cmd": "/opt/common/bin/collect_slowlog.sh",
+                "collect_es_log": {
+                    "cmd": "/opt/common/bin/collect_es_log.sh",
                     "type": "custom"
                 }
             },
@@ -62,7 +62,7 @@
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
                 "check_cmd": "curl http://localhost:9200/",
-                "action_cmd": "/opt/common/bin/restart.sh elasticsearch:v1.0"
+                "action_cmd": "/opt/common/bin/start.sh elasticsearch:v1.0"
             },
             "monitor": {
                 "enable": true,
@@ -164,19 +164,18 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-jys5vyva"
+                "image": "img-sznrwoe9"
             },
             "instance_class": {{cluster.kbn_node.instance_class}},
             "count": {{cluster.kbn_node.count}},
             "cpu": {{cluster.kbn_node.cpu}},
             "memory": {{cluster.kbn_node.memory}},
-            "vertical_scaling_policy": "sequential",
             "services": {
                 "init": {
-                    "cmd": "/opt/common/bin/init.sh kibana:v1.0"
+                    "cmd": "/opt/common/bin/init.sh kibana:v1.0;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh"
                 },
                 "start": {
-                    "cmd": "/opt/common/bin/start.sh kibana:v1.0"
+                    "cmd": "/opt/common/bin/start.sh kibana:v1.0;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh"
                 },
                 "stop": {
                     "cmd": "/opt/common/bin/stop.sh kibana:v1.0"
@@ -193,8 +192,8 @@
                 "action_timeout_sec": 30,
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
-                "check_cmd": "curl http://localhost:5601/",
-                "action_cmd": "/opt/common/bin/restart.sh kibana:v1.0"
+                "check_cmd": "/opt/common/bin/health_check.sh",
+                "action_cmd": "/opt/common/bin/start.sh kibana:v1.0;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh"
             }
         },
         {
@@ -202,7 +201,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-jys5vyva"
+                "image": "img-sznrwoe9"
             },
             "instance_class": {{cluster.lst_node.instance_class}},
             "count": {{cluster.lst_node.count}},
@@ -224,7 +223,7 @@
                     "cmd": "/opt/common/bin/stop.sh logstash:v1.0"
                 },
                 "restart": {
-                    "cmd": "/opt/common/bin/restart.sh logstash:v1.0"
+                    "cmd": "/opt/common/bin/dorestart.sh logstash:v1.0"
                 }
             },
             "env": {
@@ -240,8 +239,8 @@
                 "action_timeout_sec": 30,
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
-                "check_cmd": "curl http://localhost:9600/",
-                "action_cmd": "/opt/common/bin/restart.sh logstash:v1.0"
+                "check_cmd": "curl http://localhost:80/ && curl http://localhost:9600/",
+                "action_cmd": "/opt/common/bin/start.sh logstash:v1.0"
             }
         }
     ],
