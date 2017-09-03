@@ -501,6 +501,15 @@
                         {
                             "changeable": true,
                             "default": "",
+                            "description": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output elasticsearch section",
+                            "key": "output_es_content",
+                            "label": "output_es_content",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
                             "description": "This config is used to adding content into Gemfile for logstash",
                             "key": "gemfile_append_content",
                             "label": "gemfile_append_content",

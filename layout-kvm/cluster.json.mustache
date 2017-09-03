@@ -8,7 +8,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-sznrwoe9"
+                "image": "img-p03pj8fr"
             },
             "instance_class": {{cluster.es_node.instance_class}},
             "count": {{cluster.es_node.count}},
@@ -164,7 +164,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-sznrwoe9"
+                "image": "img-p03pj8fr"
             },
             "instance_class": {{cluster.kbn_node.instance_class}},
             "count": {{cluster.kbn_node.count}},
@@ -201,7 +201,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-sznrwoe9"
+                "image": "img-oa6ruxhk"
             },
             "instance_class": {{cluster.lst_node.instance_class}},
             "count": {{cluster.lst_node.count}},
@@ -230,6 +230,7 @@
                 "input_conf_content": {{env.lst_node.input_conf_content}},
                 "filter_conf_content": {{env.lst_node.filter_conf_content}},
                 "output_conf_content": {{env.lst_node.output_conf_content}},
+                "output_es_content": {{env.lst_node.output_es_content}},
                 "gemfile_append_content": {{env.lst_node.gemfile_append_content}}
             },
             "health_check": {

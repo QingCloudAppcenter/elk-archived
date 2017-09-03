@@ -13,6 +13,7 @@ filter {
 output {
     elasticsearch { 
         hosts => [{{ range $index,$host := $hosts }}{{ $hostip := printf "/hosts/es_node/%s/ip" $host }}{{if $index}}, {{end}}"{{getv $hostip}}"{{end}}]
+        {{ getv "/env/output_es_content" }}
     }
 
     {{ getv "/env/output_conf_content" }}

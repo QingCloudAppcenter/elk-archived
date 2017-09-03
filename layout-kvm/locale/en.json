@@ -40,6 +40,7 @@
     "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in input section": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in input section",
     "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in filter section": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in filter section",
     "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output section": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output section",
+    "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output elasticsearch section": "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output elasticsearch section",
     "Specify the location of extensional dictionary from remote.": "Specify the location of extensional dictionary from remote.",
     "Specify the location of extensional stopwords dictionary from remote.": "Specify the location of extensional stopwords dictionary from remote.",
     "This config is used to adding content into Gemfile for logstash": "This config is used to adding content into Gemfile for logstash",

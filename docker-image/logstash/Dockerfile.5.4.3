@@ -21,6 +21,8 @@ COPY bin/* /opt/logstash/bin/
 COPY confd.d/* /etc/confd/conf.d/
 COPY templates/*  /etc/confd/templates/
 
+RUN rm -f /opt/logstash/Gemfile.jruby-1.9.lock
+
 EXPOSE 9600
 
 ENTRYPOINT ["/opt/qingcloud/app-agent/bin/confd"]

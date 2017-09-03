@@ -39,6 +39,7 @@
     "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in input section": "当你执行logstash,你用-f指定你的配置文件,你的配置文件的input段的内容将由此设置项决定",
     "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in filter section": "当你执行logstash,你用-f指定你的配置文件,你的配置文件的filter段的内容将由此设置项决定",
     "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output section": "当你执行logstash,你用-f指定你的配置文件,你的配置文件的output段的内容将由此设置项决定",
+    "When you run logstash, you use the -f to specify your config file, and this config is what your config file contained in output elasticsearch section": "当你执行logstash,你用-f指定你的配置文件,你的配置文件的output段中的elasticsearch段的内容将由此设置项决定",
     "Specify the location of extensional dictionary from remote.": "指定扩展字典的远程位置",
     "Specify the location of extensional stopwords dictionary from remote.": "指定扩展停止词字典的远程位置",
     "This config is used to adding content into Gemfile for logstash": "本设置项用于为logstash的Gemfile文件增加内容",
