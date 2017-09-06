@@ -3,9 +3,13 @@
 {{if exists "/env/enable_elastichd"}}
 
 {{if eq (getv "/env/enable_elastichd") "true"}}
+
 /opt/common/bin/start.sh elastichd:v1.0 
+
 {{else}}
+
 /opt/common/bin/stop.sh elastichd:v1.0
+
 {{end}}
 
 exit 0

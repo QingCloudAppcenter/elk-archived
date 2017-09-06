@@ -12,7 +12,7 @@ case "${IMAGE_NAME}" in
             ;;
 
         logstash)
-            OPTION="-v /data:/data"
+            OPTION="-v /data:/data -v /opt/logstash/specifications:/opt/logstash/vendor/bundle/jruby/1.9/specifications -v /opt/logstash/gems:/opt/logstash/vendor/bundle/jruby/1.9/gems -v /opt/logstash/Gemfile.jruby-1.9.lock:/opt/logstash/Gemfile.jruby-1.9.lock"
             ;;
 
         elasticsearch-head)

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+{{if eq (getv "/host/role") "kbn_node"}}
+
+set -e
+
+curl http://localhost:9200/
+curl http://localhost:5601/
+
+{{if eq (getv "/env/enable_elasticsearch_head") "true"}}
+curl http://localhost:9100/
+{{end}}
+
+{{if eq (getv "/env/enable_elastichd") "true"}}
+curl http://localhost:9800/
+{{end}}
+
+{{end}}
+

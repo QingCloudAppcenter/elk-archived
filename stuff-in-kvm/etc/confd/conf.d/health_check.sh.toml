@@ -1,0 +1,5 @@
+[template]
+src = "health_check.sh.tmpl"
+dest = "/opt/common/bin/health_check.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/health_check.sh"

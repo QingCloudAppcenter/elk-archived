@@ -1,5 +1,9 @@
 #!/bin/bash
 
+/opt/common/bin/init.sh $1
+
+sleep 1
+
 . /opt/common/bin/func.sh
 
 CTRID=`ctrid $1`
