@@ -76,6 +76,7 @@
                             "key": "count",
                             "label": "Node Count",
                             "min": 3,
+                            "max": 200,
                             "required": "yes",
                             "type": "integer"
                         },
@@ -217,6 +218,7 @@
                             "key": "count",
                             "label": "Node Count",
                             "min": 0,
+                            "max": 10,
                             "required": "yes",
                             "type": "integer"
                         },
