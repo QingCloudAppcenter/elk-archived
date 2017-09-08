@@ -1,7 +1,0 @@
-[template]
-src = "Caddyfile.tmpl"
-dest = "/opt/kibana/config/Caddyfile"
-keys = [
-    "/",
-]
-reload_cmd = "/opt/kibana/bin/restart.sh"

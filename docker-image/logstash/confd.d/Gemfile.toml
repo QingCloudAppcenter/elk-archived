@@ -4,4 +4,3 @@ dest = "/opt/logstash/Gemfile"
 keys = [
     "/",
 ]
-reload_cmd = "/opt/logstash/bin/restart.sh"

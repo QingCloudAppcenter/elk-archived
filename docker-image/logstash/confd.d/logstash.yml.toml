@@ -4,4 +4,3 @@ dest = "/opt/logstash/config/logstash.yml"
 keys = [
     "/",
 ]
-reload_cmd = "/opt/logstash/bin/restart.sh"
