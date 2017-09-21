@@ -17,6 +17,8 @@ COPY templates/*  /etc/confd/templates/
 
 RUN mkdir -p /run/nginx
 
+RUN rm -f /etc/confd/confd.toml
+
 EXPOSE 5601
 
 ENTRYPOINT ["/opt/qingcloud/app-agent/bin/confd"]

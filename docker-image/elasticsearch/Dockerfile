@@ -26,6 +26,8 @@ COPY bin/* /opt/elasticsearch/bin/
 COPY confd.d/* /etc/confd/conf.d/
 COPY templates/*  /etc/confd/templates/
 
+RUN rm -f /etc/confd/confd.toml
+
 EXPOSE 9200 9300
 
 ENTRYPOINT ["/opt/qingcloud/app-agent/bin/confd"]

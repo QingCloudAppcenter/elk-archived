@@ -22,6 +22,7 @@ COPY confd.d/* /etc/confd/conf.d/
 COPY templates/*  /etc/confd/templates/
 
 RUN rm -f /opt/logstash/Gemfile.jruby-1.9.lock
+RUN rm -f /etc/confd/confd.toml
 
 EXPOSE 9600
 

@@ -11,6 +11,8 @@ ADD ElasticHD /opt/elastichd/bin
 
 COPY bin/* /opt/elastichd/bin/
 
+RUN rm -f /etc/confd/confd.toml
+
 EXPOSE 9800
 
 ENTRYPOINT ["/opt/qingcloud/app-agent/bin/confd"]
