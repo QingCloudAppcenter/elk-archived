@@ -12,6 +12,8 @@ import requests
 ES_URL = "http://127.0.0.1:9200"
 EXCLUDE_IP = "{{ range $host := $hosts }}{{ $hostip := printf "/deleting-hosts/es_node/%s/ip" $host }}{{getv $hostip}}, {{end}}"
 
+if not EXCLUDE_IP:
+    sys.exit(0)
 
 headers = {'Content-Type': 'application/json'}
 
