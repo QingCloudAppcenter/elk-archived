@@ -1,0 +1,6 @@
+[template]
+src = "logstash.yml.tmpl"
+dest = "/opt/logstash/config/logstash.yml"
+keys = [
+    "/",
+]

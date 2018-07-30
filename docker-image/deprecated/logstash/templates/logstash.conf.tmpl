@@ -1,0 +1,21 @@
+
+input {
+    {{ getv "/env/input_conf_content" }}
+}
+
+filter {
+    {{ getv "/env/filter_conf_content" }}
+}
+
+
+{{$hosts := lsdir "/hosts/es_node/"}}
+
+output {
+    elasticsearch { 
+        hosts => [{{ range $index,$host := $hosts }}{{ $hostip := printf "/hosts/es_node/%s/ip" $host }}{{if $index}}, {{end}}"{{getv $hostip}}"{{end}}]
+        {{ getv "/env/output_es_content" }}
+    }
+
+    {{ getv "/env/output_conf_content" }}
+}
+

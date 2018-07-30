@@ -1,0 +1,285 @@
+{
+    "name": {{cluster.name}},
+    "description": {{cluster.description}},
+    "vxnet": {{cluster.vxnet}},
+    "upgrade_policy": ["appv-2jen6hgl", "appv-peerfx0a", "appv-uvvpqdue", "appv-0nbffjvb"],
+    "nodes": [
+        {
+            "role": "es_node",
+            "container": {
+                "type": "kvm",
+                "zone": "pek3a",
+                "image": "img-pnio6m1q"
+            },
+            "instance_class": {{cluster.es_node.instance_class}},
+            "count": {{cluster.es_node.count}},
+            "cpu": {{cluster.es_node.cpu}},
+            "memory": {{cluster.es_node.memory}},
+            "volume": {
+                "size": {{cluster.es_node.volume_size}}
+            },
+            "vertical_scaling_policy": "sequential",
+            "services": {
+                "init": {
+                    "cmd": "/opt/common/bin/init.sh elasticsearch:v1.2.4"
+                },
+                "start": {
+                    "cmd": "/opt/common/bin/start.sh elasticsearch:v1.2.4"
+                },
+                "stop": {
+                    "cmd": "/opt/common/bin/stop.sh elasticsearch:v1.2.4"
+                },
+                "restart": {
+                    "cmd": "/opt/common/bin/dorestart.sh elasticsearch:v1.2.4"
+                },
+                "scale_in": {
+                    "nodes_to_execute_on": 1,
+                    "pre_check": "/opt/common/bin/destroy.sh",
+                    "cmd": "echo 0",
+                    "timeout": 86400
+                },
+                "collect_es_log": {
+                    "cmd": "/opt/common/bin/collect_es_log.sh",
+                    "type": "custom"
+                }
+            },
+            "env": {
+                "action.destructive_requires_name": {{env.es_node.action.destructive_requires_name}},
+                "indices.fielddata.cache.size": {{env.es_node.indices.fielddata.cache.size}},
+                "logstash_node_ip": {{env.es_node.logstash_node_ip}},
+                "discovery.zen.no_master_block": {{env.es_node.discovery.zen.no_master_block}},
+                "gateway.recover_after_time": {{env.es_node.gateway.recover_after_time}},
+                "http.cors.enabled": {{env.es_node.http.cors.enabled}},
+                "http.cors.allow-origin": {{env.es_node.http.cors.allow-origin}},
+                "indices.queries.cache.size": {{env.es_node.indices.queries.cache.size}},
+                "indices.memory.index_buffer_size": {{env.es_node.indices.memory.index_buffer_size}},
+                "indices.requests.cache.size": {{env.es_node.indices.requests.cache.size}},
+                "script.inline": {{env.es_node.script.inline}},
+                "script.stored": {{env.es_node.script.stored}},
+                "script.file": {{env.es_node.script.file}},
+                "script.aggs": {{env.es_node.script.aggs}},
+                "script.search": {{env.es_node.script.search}},
+                "script.update": {{env.es_node.script.update}},
+                "remote_ext_dict": {{env.es_node.remote_ext_dict}},
+                "remote_ext_stopwords": {{env.es_node.remote_ext_stopwords}},
+                "path.repo": {{env.es_node.path.repo}},
+                "repositories.url.allowed_urls": {{env.es_node.repositories.url.allowed_urls}},
+                "es_additional_config": {{env.es_node.es_additional_config}}
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:80/ && curl http://localhost:9200/",
+                "action_cmd": "systemctl start caddy;/opt/common/bin/start.sh elasticsearch:v1.2.4"
+            },
+            "monitor": {
+                "enable": true,
+                "cmd": "/opt/common/bin/monitor.sh elasticsearch:v1.2.4",
+                "items": {
+                    "cluster_status": {
+                        "unit": "",
+                        "value_type": "str",
+                        "statistics_type": "latest",
+                        "enums": ["green", "yellow", "red"]
+                    },
+                    "cluster_jvm_heap_used_in_percent": {
+                        "unit": "%",
+                        "value_type": "int",
+                        "statistics_type": "avg",
+                        "scale_factor_when_display": 0.1
+                    },
+                    "cluster_jvm_threads_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_indices_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_shards_primaries_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_shards_replication_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_docs_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "cluster_docs_deleted_count": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "number_of_nodes": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "relocating_shards": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "initializing_shards": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "unassigned_shards": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "number_of_pending_tasks": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "number_of_in_flight_fetch": {
+                        "unit": "",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "task_max_waiting_in_queue_millis": {
+                        "unit": "ms",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    },
+                    "active_shards_percent_as_number": {
+                        "unit": "%",
+                        "value_type": "int",
+                        "statistics_type": "latest"
+                    }
+                },
+                "groups": {
+                    "cluster_docs_group": ["cluster_docs_count", "cluster_docs_deleted_count"],
+                    "cluster_shards_group": ["cluster_shards_primaries_count", "cluster_shards_replication_count", "relocating_shards", "initializing_shards", "unassigned_shards"]
+                },
+                "display": ["cluster_status", "number_of_nodes", "cluster_indices_count", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "cluster_docs_group", "cluster_shards_group", "number_of_pending_tasks", "number_of_in_flight_fetch", "task_max_waiting_in_queue_millis", "active_shards_percent_as_number"],
+                "alarm": ["cluster_status", "number_of_nodes", "cluster_jvm_heap_used_in_percent", "cluster_jvm_threads_count", "relocating_shards", "unassigned_shards", "number_of_pending_tasks", "number_of_in_flight_fetch", "task_max_waiting_in_queue_millis", "active_shards_percent_as_number"]
+            }
+        },
+        {
+            "role": "kbn_node",
+            "container": {
+                "type": "kvm",
+                "zone": "pek3a",
+                "image": "img-pnio6m1q"
+            },
+            "instance_class": {{cluster.kbn_node.instance_class}},
+            "count": {{cluster.kbn_node.count}},
+            "cpu": {{cluster.kbn_node.cpu}},
+            "memory": {{cluster.kbn_node.memory}},
+            "services": {
+                "init": {
+                    "cmd": "/opt/common/bin/init.sh kibana:v1.2.4;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
+                },
+                "start": {
+                    "cmd": "/opt/common/bin/start.sh kibana:v1.2.4;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
+                },
+                "stop": {
+                    "cmd": "/opt/common/bin/stop.sh kibana:v1.2.4"
+                }
+            },
+            "env": {
+                "enable_elasticsearch_head": {{env.kbn_node.enable_elasticsearch_head}},
+                "enable_elastichd": {{env.kbn_node.enable_elastichd}},
+                "enable_cerebro": {{env.kbn_node.enable_cerebro}},
+                "enable_elasticsearch_sql": {{env.kbn_node.enable_elasticsearch_sql}},
+                "nginx_client_max_body_size": {{env.kbn_node.nginx_client_max_body_size}}
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "/opt/common/bin/health_check.sh",
+                "action_cmd": "/opt/common/bin/start.sh kibana:v1.2.4;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
+            }
+        },
+        {
+            "role": "lst_node",
+            "container": {
+                "type": "kvm",
+                "zone": "pek3a",
+                "image": "img-wpy2jqqb"
+            },
+            "instance_class": {{cluster.lst_node.instance_class}},
+            "count": {{cluster.lst_node.count}},
+            "cpu": {{cluster.lst_node.cpu}},
+            "memory": {{cluster.lst_node.memory}},
+            "volume": {
+                "size": {{cluster.lst_node.volume_size}}
+            },
+            "user_access": true,
+            "services": {
+                "init": {
+                    "cmd": "/usr/share/logstash/sbin/init.sh"
+                },
+                "start": {
+                    "cmd": "/usr/share/logstash/sbin/start.sh"
+                },
+                "stop": {
+                    "cmd": "/usr/share/logstash/sbin/stop.sh"
+                },
+                "restart": {
+                    "cmd": "/usr/share/logstash/sbin/dorestart.sh"
+                }
+            },
+            "env": {
+                "input_conf_content": {{env.lst_node.input_conf_content}},
+                "filter_conf_content": {{env.lst_node.filter_conf_content}},
+                "output_conf_content": {{env.lst_node.output_conf_content}},
+                "output_es_content": {{env.lst_node.output_es_content}},
+                "gemfile_append_content": {{env.lst_node.gemfile_append_content}}
+            },
+            "health_check": {
+                "enable": true,
+                "interval_sec": 60,
+                "timeout_sec": 10,
+                "action_timeout_sec": 30,
+                "healthy_threshold": 2,
+                "unhealthy_threshold": 2,
+                "check_cmd": "curl http://localhost:80/ && curl http://localhost:9600/",
+                "action_cmd": "systemctl start caddy;/usr/share/logstash/sbin/start.sh"
+            }
+        }
+    ],
+    "advanced_actions": ["scale_horizontal"],
+    "endpoints": {
+        "ElasticSearch": {
+            "port": 9200,
+            "protocol": "http"
+        },
+        "Kibana": {
+            "port": 5601,
+            "protocol": "http"
+        },
+        "ES Head on Kibana": {
+            "port": 9100,
+            "protocol": "http"
+        },
+        "ElasticHD on Kibana": {
+            "port": 9800,
+            "protocol": "http"
+        },
+        "Logstash": {
+            "port": 9600,
+            "protocol": "http"
+        }
+    }
+}

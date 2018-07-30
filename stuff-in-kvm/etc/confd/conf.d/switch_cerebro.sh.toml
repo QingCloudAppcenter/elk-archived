@@ -1,0 +1,5 @@
+[template]
+src = "switch_cerebro.sh.tmpl"
+dest = "/opt/common/bin/switch_cerebro.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/switch_cerebro.sh && /opt/common/bin/switch_cerebro.sh"

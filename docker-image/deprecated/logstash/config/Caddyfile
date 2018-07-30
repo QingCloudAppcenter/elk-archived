@@ -1,0 +1,8 @@
+0.0.0.0:80 {
+    root /data/elasticsearch
+    browse
+    upload /dicts {
+        yes_without_tls
+        to "/data/elasticsearch/dicts"
+    }
+}

@@ -1,0 +1,7 @@
+[template]
+src = "IKAnalyzer.cfg.xml.tmpl"
+dest = "/opt/elasticsearch/plugins/analysis-ik/config/IKAnalyzer.cfg.xml"
+keys = [
+    "/",
+]
+reload_cmd = "/opt/elasticsearch/bin/changeowner.sh"

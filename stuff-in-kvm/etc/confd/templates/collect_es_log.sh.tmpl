@@ -1,0 +1,31 @@
+#!/bin/bash
+
+{{if eq (getv "/host/role") "es_node"}}
+
+. /opt/common/bin/func.sh
+
+{{if ne (getv "/env/logstash_node_ip") ""}}
+LST_HOSTS=("{{getv "/env/logstash_node_ip"}}")
+{{else}}
+
+{{$hosts := lsdir "/hosts/lst_node/"}}
+LST_HOSTS=({{ range $index,$host := $hosts }}{{ $hostip := printf "/hosts/lst_node/%s/ip" $host }}{{if $index}} {{end}}"{{getv $hostip}}"{{end}})
+
+{{end}}
+
+LST_HOST=${LST_HOSTS[0]}
+
+if [ -z "$LST_HOST" ]; then
+    #exit 1
+    exit 0
+fi
+
+checkip $LST_HOST
+if [ $? -ne 0 ]; then
+    exit 2
+fi
+
+ssh $LST_HOST "mkdir -p /data/elasticsearch/logs/{{getv "/host/ip"}}/"
+scp /data/elasticsearch/logs/*.log ${LST_HOST}:/data/elasticsearch/logs/{{getv "/host/ip"}}/
+
+{{end}}

@@ -1,0 +1,5 @@
+[template]
+src = "destroy.sh.tmpl"
+dest = "/opt/common/bin/destroy.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/destroy.sh"

@@ -1,0 +1,6 @@
+[template]
+src = "monitor.py.tmpl"
+dest = "/opt/elasticsearch/bin/monitor.py"
+keys = [
+    "/",
+]

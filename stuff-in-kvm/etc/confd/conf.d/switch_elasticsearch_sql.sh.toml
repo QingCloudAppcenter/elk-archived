@@ -1,0 +1,5 @@
+[template]
+src = "switch_elasticsearch_sql.sh.tmpl"
+dest = "/opt/common/bin/switch_elasticsearch_sql.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/switch_elasticsearch_sql.sh && /opt/common/bin/switch_elasticsearch_sql.sh"

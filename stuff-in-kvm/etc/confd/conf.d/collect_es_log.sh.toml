@@ -1,0 +1,5 @@
+[template]
+src = "collect_es_log.sh.tmpl"
+dest = "/opt/common/bin/collect_es_log.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/collect_es_log.sh"

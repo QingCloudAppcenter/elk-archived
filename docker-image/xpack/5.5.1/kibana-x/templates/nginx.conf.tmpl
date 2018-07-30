@@ -1,0 +1,16 @@
+{{$hosts := lsdir "/hosts/es_node/"}}
+
+upstream  backend {
+
+{{range $host := $hosts}}{{$hostip := printf "/hosts/es_node/%s/ip" $host}}    server {{getv $hostip}}:9200;{{printf "\n"}}{{end}}
+
+}
+
+server {
+        listen 9200 default_server;
+        listen [::]:9200 default_server;
+
+        location / {
+            proxy_pass http://backend;
+        }
+}

@@ -1,0 +1,6 @@
+[template]
+src = "Gemfile.tmpl.5.4.3"
+dest = "/opt/logstash/Gemfile"
+keys = [
+    "/",
+]

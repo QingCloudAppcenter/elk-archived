@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+
+{{$hosts := lsdir "/deleting-hosts/es_node/"}}
+
+
+import time
+import json
+import sys
+import requests
+
+
+ES_URL = "http://127.0.0.1:9200"
+EXCLUDE_IP = "{{ range $host := $hosts }}{{ $hostip := printf "/deleting-hosts/es_node/%s/ip" $host }}{{getv $hostip}}, {{end}}"
+
+
+headers = {'Content-Type': 'application/json'}
+
+data = {
+  "transient" : {
+    "cluster.routing.allocation.exclude._ip" : EXCLUDE_IP
+  }
+}
+
+
+try:
+    r = requests.put("%s/_cluster/settings" % ES_URL, headers=headers, json=data)
+except Exception as e:
+    print "%s" % e
+    sys.exit(1)
+
+
+jr = json.loads(r.text)
+
+if jr.has_key("acknowledged") and jr['acknowledged'] == True:
+    pass
+else:
+    print r.text
+    sys.exit(1)
+
+time.sleep(1)
+
+while True:
+    try:
+        r = requests.get("%s/_cluster/health" % ES_URL, headers=headers)
+    except Exception as e:
+        print "%s" % e
+        sys.exit(1)
+
+    jr = json.loads(r.text)
+
+    if jr["status"] == "green" and jr['unassigned_shards'] == 0 and jr['relocating_shards'] == 0:
+        sys.exit(0)
+    else:
+        time.sleep(10)
+
+

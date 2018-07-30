@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+{{if exists "/env/enable_cerebro"}}
+
+{{if eq (getv "/env/enable_cerebro") "true"}}
+
+/opt/common/bin/start.sh cerebro:v1.2.1 
+
+{{else}}
+
+/opt/common/bin/stop.sh cerebro:v1.2.1
+
+{{end}}
+
+exit 0
+
+{{end}}

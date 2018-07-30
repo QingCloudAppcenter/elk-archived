@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+
+import json
+import socket
+import sys
+import requests
+import logging
+
+AUTH_USERNAME = "{{getv "/env/auth_username"}}"
+AUTH_PASSWORD = "{{getv "/env/auth_password"}}"
+
+try:
+    r = requests.get("http://%s:%s@localhost:9200/_cluster/stats" % (AUTH_USERNAME, AUTH_PASSWORD))
+except Exception as e:
+    sys.exit(1)
+
+d = json.loads(r.text)
+
+nodes = d['nodes']
+jvm = nodes['jvm']
+jvm_mem = jvm['mem']
+
+cluster_jvm_heap_used_in_percent = float(jvm_mem['heap_used_in_bytes']) / float(jvm_mem['heap_max_in_bytes'])
+
+indices = d['indices']
+shards = indices['shards']
+
+docs = indices['docs']
+
+output = {
+    'cluster_status': d['status'],
+    'cluster_jvm_heap_used_in_percent': int(cluster_jvm_heap_used_in_percent * 100 * 10),
+    'cluster_jvm_threads_count': int(jvm['threads']),
+    'cluster_indices_count': int(indices['count']),
+    'cluster_shards_primaries_count': int(shards['primaries']),
+    'cluster_shards_replication_count': int(shards['replication']),
+    'cluster_docs_count': int(docs['count']),
+    'cluster_docs_deleted_count': int(docs['deleted']),
+}
+
+try:
+    r = requests.get("http://%s:%s@localhost:9200/_cluster/health" % (AUTH_USERNAME, AUTH_PASSWORD))
+except Exception as e:
+    sys.exit(1)
+
+d = json.loads(r.text)
+
+output.update(d)
+
+print(json.dumps(output))
+

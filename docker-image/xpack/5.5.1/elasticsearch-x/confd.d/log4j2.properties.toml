@@ -1,0 +1,7 @@
+[template]
+src = "log4j2.properties.tmpl"
+dest = "/opt/elasticsearch/config/log4j2.properties"
+keys = [
+    "/",
+]
+reload_cmd = "/opt/elasticsearch/bin/changeowner.sh"
