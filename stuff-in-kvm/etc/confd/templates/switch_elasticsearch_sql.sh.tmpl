@@ -4,11 +4,11 @@
 
 {{if eq (getv "/env/enable_elasticsearch_sql") "true"}}
 
-/opt/common/bin/start.sh elasticsearch-sql:v1.2.1 
+/opt/common/bin/start.sh elasticsearch-sql:v1.2.6
 
 {{else}}
 
-/opt/common/bin/stop.sh elasticsearch-sql:v1.2.1
+/opt/common/bin/stop.sh elasticsearch-sql:v1.2.6
 
 {{end}}
 

@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function log () {
+    LOG_FILE=/opt/qingcloud/app-agent/log/app.log
+
+    echo $1 >> ${LOG_FILE}
+}
+
 function waitport () {
     while ! nc -z $1 $2; do
         sleep 2
@@ -17,5 +23,3 @@ function wait_dir_own_by_user () {
         sleep 2
     done
 }
-
-

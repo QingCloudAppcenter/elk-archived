@@ -5,7 +5,7 @@ import json
 import socket
 import sys
 
-conn = httplib.HTTPConnection("127.0.0.1:9200")
+conn = httplib.HTTPConnection("127.0.0.1:9200", timeout=10)
 try:
     conn.request("GET", "/_cluster/stats")
 except socket.error as e:

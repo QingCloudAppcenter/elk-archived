@@ -1,0 +1,5 @@
+[template]
+src = "install_crontab.sh.tmpl"
+dest = "/opt/common/bin/install_crontab.sh"
+keys = ["/",]
+reload_cmd = "chmod +x /opt/common/bin/install_crontab.sh && /opt/common/bin/install_crontab.sh"

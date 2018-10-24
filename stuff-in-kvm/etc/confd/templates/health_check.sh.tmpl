@@ -4,23 +4,23 @@
 
 set -e
 
-curl http://localhost:9200/
-curl http://localhost:5601/
+curl --connect-timeout 10 http://localhost:9200/
+curl --connect-timeout 10 http://localhost:5601/
 
 {{if eq (getv "/env/enable_elasticsearch_head") "true"}}
-curl http://localhost:9100/
+curl --connect-timeout 10 http://localhost:9100/
 {{end}}
 
 {{if eq (getv "/env/enable_elastichd") "true"}}
-curl http://localhost:9800/
+curl --connect-timeout 10 http://localhost:9800/
 {{end}}
 
 {{if eq (getv "/env/enable_cerebro") "true"}}
-curl http://localhost:9000/
+curl --connect-timeout 10 http://localhost:9000/
 {{end}}
 
 {{if eq (getv "/env/enable_elasticsearch_sql") "true"}}
-curl http://localhost:8080/
+curl --connect-timeout 10 http://localhost:8080/
 {{end}}
 
 {{end}}

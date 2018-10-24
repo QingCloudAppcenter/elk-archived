@@ -84,9 +84,21 @@
 # heap dumps are created in the working directory of the JVM
 #-XX:+HeapDumpOnOutOfMemoryError
 
+{{if exists "/env/enable_heap_dump"}}
+{{if eq (getv "/env/enable_heap_dump") "true"}}
+-XX:+HeapDumpOnOutOfMemoryError
+{{end}}
+{{end}}
+
 # specify an alternative path for heap dumps
 # ensure the directory exists and has sufficient space
 #-XX:HeapDumpPath=${heap.dump.path}
+
+{{if exists "/env/enable_heap_dump"}}
+{{if eq (getv "/env/enable_heap_dump") "true"}}
+-XX:HeapDumpPath={{ getv "/env/heap_dump_path" }}
+{{end}}
+{{end}}
 
 ## GC logging
 

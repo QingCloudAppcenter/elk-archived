@@ -2,14 +2,14 @@
     "name": {{cluster.name}},
     "description": {{cluster.description}},
     "vxnet": {{cluster.vxnet}},
-    "upgrade_policy": ["appv-3dbgkiwr", "appv-0nbffjvb", "appv-uvvpqdue", "appv-peerfx0a", "appv-2jen6hgl"],
+    "upgrade_policy": ["appv-rgbvk8q2", "appv-3dbgkiwr", "appv-0nbffjvb", "appv-uvvpqdue", "appv-peerfx0a", "appv-2jen6hgl"],
     "nodes": [
         {
             "role": "es_node",
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-cx2d3c3v"
+                "image": "img-0j2yggwl"
             },
             "instance_class": {{cluster.es_node.instance_class}},
             "count": {{cluster.es_node.count}},
@@ -21,16 +21,16 @@
             "vertical_scaling_policy": "sequential",
             "services": {
                 "init": {
-                    "cmd": "/opt/common/bin/init.sh elasticsearch:v1.2.4"
+                    "cmd": "/opt/common/bin/init.sh elasticsearch:v1.2.6"
                 },
                 "start": {
-                    "cmd": "/opt/common/bin/start.sh elasticsearch:v1.2.4"
+                    "cmd": "/opt/common/bin/start.sh elasticsearch:v1.2.6"
                 },
                 "stop": {
-                    "cmd": "/opt/common/bin/stop.sh elasticsearch:v1.2.4"
+                    "cmd": "/opt/common/bin/stop.sh elasticsearch:v1.2.6"
                 },
                 "restart": {
-                    "cmd": "/opt/common/bin/dorestart.sh elasticsearch:v1.2.4"
+                    "cmd": "/opt/common/bin/dorestart.sh elasticsearch:v1.2.6"
                 },
                 "scale_in": {
                     "nodes_to_execute_on": 1,
@@ -64,7 +64,17 @@
                 "remote_ext_stopwords": {{env.es_node.remote_ext_stopwords}},
                 "path.repo": {{env.es_node.path.repo}},
                 "repositories.url.allowed_urls": {{env.es_node.repositories.url.allowed_urls}},
-                "es_additional_config": {{env.es_node.es_additional_config}}
+                "es_additional_line1": {{env.es_node.es_additional_line1}},
+                "es_additional_line2": {{env.es_node.es_additional_line2}},
+                "es_additional_line3": {{env.es_node.es_additional_line3}},
+                "logger.action.level": {{env.es_node.logger.action.level}},
+                "rootLogger.level": {{env.es_node.rootLogger.level}},
+                "logger.deprecation.level": {{env.es_node.logger.deprecation.level}},
+                "logger.index_search_slowlog_rolling.level": {{env.es_node.logger.index_search_slowlog_rolling.level}},
+                "logger.index_indexing_slowlog.level": {{env.es_node.logger.index_indexing_slowlog.level}},
+                "enable_heap_dump": {{env.es_node.enable_heap_dump}},
+                "heap_dump_path": {{env.es_node.heap_dump_path}},
+                "clean_logs_older_than_n_days": {{env.es_node.clean_logs_older_than_n_days}}
             },
             "health_check": {
                 "enable": true,
@@ -73,12 +83,12 @@
                 "action_timeout_sec": 30,
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
-                "check_cmd": "curl http://localhost:80/ && curl http://localhost:9200/",
-                "action_cmd": "systemctl start caddy;/opt/common/bin/start.sh elasticsearch:v1.2.4"
+                "check_cmd": "curl --connect-timeout 10 http://localhost:80/ && curl --connect-timeout 10 http://localhost:9200/",
+                "action_cmd": "systemctl start caddy;/opt/common/bin/start.sh elasticsearch:v1.2.6"
             },
             "monitor": {
                 "enable": true,
-                "cmd": "/opt/common/bin/monitor.sh elasticsearch:v1.2.4",
+                "cmd": "/opt/common/bin/monitor.sh elasticsearch:v1.2.6",
                 "items": {
                     "cluster_status": {
                         "unit": "",
@@ -176,7 +186,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-cx2d3c3v"
+                "image": "img-0j2yggwl"
             },
             "instance_class": {{cluster.kbn_node.instance_class}},
             "count": {{cluster.kbn_node.count}},
@@ -184,13 +194,13 @@
             "memory": {{cluster.kbn_node.memory}},
             "services": {
                 "init": {
-                    "cmd": "/opt/common/bin/init.sh kibana:v1.2.4;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
+                    "cmd": "/opt/common/bin/init.sh kibana:v1.2.6;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
                 },
                 "start": {
-                    "cmd": "/opt/common/bin/start.sh kibana:v1.2.4;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
+                    "cmd": "/opt/common/bin/start.sh kibana:v1.2.6;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
                 },
                 "stop": {
-                    "cmd": "/opt/common/bin/stop.sh kibana:v1.2.4"
+                    "cmd": "/opt/common/bin/stop.sh kibana:v1.2.6"
                 }
             },
             "env": {
@@ -208,7 +218,7 @@
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
                 "check_cmd": "/opt/common/bin/health_check.sh",
-                "action_cmd": "/opt/common/bin/start.sh kibana:v1.2.4;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
+                "action_cmd": "/opt/common/bin/start.sh kibana:v1.2.6;/opt/common/bin/switch_elastichd.sh;/opt/common/bin/switch_elasticsearch_head.sh;/opt/common/bin/switch_cerebro.sh;/opt/common/bin/switch_elasticsearch_sql.sh"
             }
         },
         {
@@ -216,7 +226,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-wpy2jqqb"
+                "image": "img-u9npxydv"
             },
             "instance_class": {{cluster.lst_node.instance_class}},
             "count": {{cluster.lst_node.count}},
@@ -254,7 +264,7 @@
                 "action_timeout_sec": 30,
                 "healthy_threshold": 2,
                 "unhealthy_threshold": 2,
-                "check_cmd": "curl http://localhost:80/ && curl http://localhost:9600/",
+                "check_cmd": "curl --connect-timeout 10 http://localhost:80/ && curl --connect-timeout 10 http://localhost:9600/",
                 "action_cmd": "systemctl start caddy;/usr/share/logstash/sbin/start.sh"
             }
         }

@@ -4,11 +4,11 @@
 
 {{if eq (getv "/env/enable_elastichd") "true"}}
 
-/opt/common/bin/start.sh elastichd:v1.0 
+/opt/common/bin/start.sh elastichd:v1.2.6
 
 {{else}}
 
-/opt/common/bin/stop.sh elastichd:v1.0
+/opt/common/bin/stop.sh elastichd:v1.2.6
 
 {{end}}
 

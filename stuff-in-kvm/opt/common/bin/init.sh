@@ -5,7 +5,8 @@ BASE_OPTION="-v /etc/confd/confd.toml:/etc/confd/confd.toml"
 
 case "${IMAGE_NAME}" in
         elasticsearch)
-            OPTION="-v /data:/data"
+            mkdir -p /data/qingcloud/app-agent/log
+            OPTION="-v /data:/data -v /data/qingcloud/app-agent/log:/opt/qingcloud/app-agent/log"
             ;;
 
         kibana)

@@ -74,6 +74,13 @@
     "Specify the location of read-only URL repository.": "Specify the location of read-only URL repository.",
     "The additional configuration in elasticsearch.yml.": "The additional configuration in elasticsearch.yml.",
     "Sets the maximum allowed size of the client request body in nginx.": "Sets the maximum allowed size of the client request body in nginx.",
+    "The logger.action.level configuration in log4j2.properties.": "The logger.action.level configuration in log4j2.properties.",
+    "The rootLogger.level configuration in log4j2.properties.": "The rootLogger.level configuration in log4j2.properties.",
+    "The logger.deprecation.level configuration in log4j2.properties.": "The logger.deprecation.level configuration in log4j2.properties.",
+    "The logger.index_search_slowlog_rolling.level configuration in log4j2.properties.": "The logger.index_search_slowlog_rolling.level configuration in log4j2.properties.",
+    "The logger.index_indexing_slowlog.level configuration in log4j2.properties.": "The logger.index_indexing_slowlog.level configuration in log4j2.properties.",
+    "Whether to enable heap dump on out of memory error.": "Whether to enable heap dump on out of memory error.",
+    "The path of heap dump.": "The path of heap dump.",
+    "Clean logs older than n days, n can be changed here.": "Clean logs older than n days, n can be changed here.",
     "err_code1": "Data migration is unfinished before deleting host, please finish it manually or contact us."
 }
-

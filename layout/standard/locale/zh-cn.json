@@ -73,6 +73,13 @@
     "Specify the location of read-only URL repository.": "指定只读URL仓库的位置",
     "The additional configuration in elasticsearch.yml.": "elasticsearch.yml中的附加配置",
     "Sets the maximum allowed size of the client request body in nginx.": "设置nginx客户端请求体的最大允许值",
+    "The logger.action.level configuration in log4j2.properties.": "日志配置文件log4j2.properties中的logger.action.level配置项",
+    "The rootLogger.level configuration in log4j2.properties.": "日志配置文件log4j2.properties中的rootLogger.level配置项",
+    "The logger.deprecation.level configuration in log4j2.properties.": "日志配置文件log4j2.properties中的logger.deprecation.level配置项",
+    "The logger.index_search_slowlog_rolling.level configuration in log4j2.properties.": "日志配置文件log4j2.properties中的logger.index_search_slowlog_rolling.level配置项",
+    "The logger.index_indexing_slowlog.level configuration in log4j2.properties.": "日志配置文件log4j2.properties中的logger.index_indexing_slowlog.level配置项",
+    "Whether to enable heap dump on out of memory error.": "是否启用heap dump",
+    "The path of heap dump.": "Heap dump文件的存储路径",
+    "Clean logs older than n days, n can be changed here.": "清理老于n天的日志，n可以在这里配置",
     "err_code1": "待删除节点上的数据未成功迁移到其他节点,请手动迁移或通过工单与我们联系"
 }
-

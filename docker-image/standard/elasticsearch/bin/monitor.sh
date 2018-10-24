@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python /opt/elasticsearch/bin/monitor.py
+exec python /opt/elasticsearch/bin/monitor.py

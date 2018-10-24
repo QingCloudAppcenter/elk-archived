@@ -459,10 +459,104 @@
                             "changeable": true,
                             "default": "",
                             "description": "The additional configuration in elasticsearch.yml.",
-                            "key": "es_additional_config",
-                            "label": "es_additional_config",
+                            "key": "es_additional_line1",
+                            "label": "es_additional_line1",
                             "required": "no",
                             "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "The additional configuration in elasticsearch.yml.",
+                            "key": "es_additional_line2",
+                            "label": "es_additional_line2",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "",
+                            "description": "The additional configuration in elasticsearch.yml.",
+                            "key": "es_additional_line3",
+                            "label": "es_additional_line3",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "info",
+                            "description": "The logger.action.level configuration in log4j2.properties.",
+                            "key": "logger.action.level",
+                            "label": "logger.action.level",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "info",
+                            "description": "The rootLogger.level configuration in log4j2.properties.",
+                            "key": "rootLogger.level",
+                            "label": "rootLogger.level",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "warn",
+                            "description": "The logger.deprecation.level configuration in log4j2.properties.",
+                            "key": "logger.deprecation.level",
+                            "label": "logger.deprecation.level",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "trace",
+                            "description": "The logger.index_search_slowlog_rolling.level configuration in log4j2.properties.",
+                            "key": "logger.index_search_slowlog_rolling.level",
+                            "label": "logger.index_search_slowlog_rolling.level",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "trace",
+                            "description": "The logger.index_indexing_slowlog.level configuration in log4j2.properties.",
+                            "key": "logger.index_indexing_slowlog.level",
+                            "label": "logger.index_indexing_slowlog.level",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": false,
+                            "description": "Whether to enable heap dump on out of memory error.",
+                            "key": "enable_heap_dump",
+                            "label": "enable_heap_dump",
+                            "range": [
+                                true,
+                                false
+                            ],
+                            "required": "no",
+                            "type": "boolean"
+                        },
+                        {
+                            "changeable": true,
+                            "default": "/data/elasticsearch/dump",
+                            "description": "The path of heap dump.",
+                            "key": "heap_dump_path",
+                            "label": "heap_dump_path",
+                            "required": "no",
+                            "type": "string"
+                        },
+                        {
+                            "changeable": true,
+                            "default": 7,
+                            "description": "Clean logs older than n days, n can be changed here.",
+                            "key": "clean_logs_older_than_n_days",
+                            "label": "clean_logs_older_than_n_days",
+                            "required": "no",
+                            "type": "integer"
                         }
                     ],
                     "type": "array"

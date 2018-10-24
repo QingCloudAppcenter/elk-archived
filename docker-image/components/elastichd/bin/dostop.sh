@@ -6,7 +6,7 @@ echo "[Stop] ElasticHD pid is ${PID}."
 
 if [ -n "$PID" ]; then
     echo "[Stop] Kill ElasticHD with pid ${PID}."
-    kill -15 $PID
+    kill -9 $PID
 else
     echo "[Stop] ElasticHD is not running."
 fi

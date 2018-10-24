@@ -1,6 +1,6 @@
 #!/bin/bash
 
-flock -n /tmp/es.lock -c "/opt/elasticsearch/bin/dostop.sh >> /opt/qingcloud/app-agent/log/app.log"
+flock -n /tmp/es.lock -c "/opt/elasticsearch/bin/dostop.sh"
 if [ $? -ne 0 ]; then
     echo "[=[Stop]=] Can't lock the file."
 else

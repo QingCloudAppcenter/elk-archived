@@ -15,6 +15,7 @@ EXCLUDE_IP = "{{ range $host := $hosts }}{{ $hostip := printf "/deleting-hosts/e
 if not EXCLUDE_IP:
     sys.exit(0)
 
+
 headers = {'Content-Type': 'application/json'}
 
 data = {

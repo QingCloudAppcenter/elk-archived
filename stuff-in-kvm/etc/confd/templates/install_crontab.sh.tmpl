@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir -p /data/elasticsearch/crontab
+crontab -l > /data/elasticsearch/crontab/cron.old
+echo '0 4 * * * find /data/elasticsearch/logs -type f -name "*.log" -mtime +{{ getv "/env/clean_logs_older_than_n_days" }} -exec rm -f {} \;' > /data/elasticsearch/crontab/cron.pre
+crontab /data/elasticsearch/crontab/cron.pre
+crontab -l > /data/elasticsearch/crontab/cron.installed

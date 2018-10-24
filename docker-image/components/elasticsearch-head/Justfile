@@ -1,4 +1,4 @@
-image = "dockerhub.qingcloud.com/qingcloud/elasticsearch-head:v1.2.4"
+image = "dockerhub.qingcloud.com/qingcloud/elasticsearch-head:v1.2.6"
 
 help:
   @just -l
