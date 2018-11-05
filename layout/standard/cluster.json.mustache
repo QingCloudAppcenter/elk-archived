@@ -2,14 +2,14 @@
     "name": {{cluster.name}},
     "description": {{cluster.description}},
     "vxnet": {{cluster.vxnet}},
-    "upgrade_policy": ["appv-rgbvk8q2", "appv-3dbgkiwr", "appv-0nbffjvb", "appv-uvvpqdue", "appv-peerfx0a", "appv-2jen6hgl"],
+    "upgrade_policy": ["appv-je6ftfs2", "appv-rgbvk8q2", "appv-3dbgkiwr", "appv-0nbffjvb", "appv-uvvpqdue", "appv-peerfx0a", "appv-2jen6hgl"],
     "nodes": [
         {
             "role": "es_node",
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-0j2yggwl"
+                "image": "img-jz66gkyv"
             },
             "instance_class": {{cluster.es_node.instance_class}},
             "count": {{cluster.es_node.count}},
@@ -186,7 +186,7 @@
             "container": {
                 "type": "kvm",
                 "zone": "pek3a",
-                "image": "img-0j2yggwl"
+                "image": "img-jz66gkyv"
             },
             "instance_class": {{cluster.kbn_node.instance_class}},
             "count": {{cluster.kbn_node.count}},
